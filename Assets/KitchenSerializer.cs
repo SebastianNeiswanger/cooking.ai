@@ -8,12 +8,22 @@ public class KitchenSerializer : MonoBehaviour
 {
     public GameObject Tile;
     public GameObject Divider;
-    private string filepath = "Test.json";
+    public string filepath;
+    public bool DeserializeOnLoad;
 
     private void Start()
     {
-        SerializeKitchen();
-        DeserializeKitchen();
+        if (DeserializeOnLoad)
+        {
+            DeserializeKitchen();
+        }
+    }
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
+        {
+            SerializeKitchen();
+        }
     }
     void SerializeKitchen()
     {
@@ -25,35 +35,49 @@ public class KitchenSerializer : MonoBehaviour
 
         foreach (GameObject obj in objects)
         {
-            //TODO: all of this
             data.type = obj.tag;
-            // Tile type
-            data.objName = obj.name;
-            // Grid spaces?
-            data.posX = obj.transform.position.x;
-            data.posZ = obj.transform.position.z;
+
+            if (obj.CompareTag("Tile"))
+            {
+                Tile objTile = obj.GetComponent<Tile>();
+                data.subtype = objTile.subtype;
+                // Grid spaces
+                data.posX = objTile.X;
+                data.posZ = objTile.Z;
+                data.orientation = objTile.Orientation;
+            }
+            else if (obj.CompareTag("Divider"))
+            {
+                Divider objDivider = obj.GetComponent<Divider>();
+                data.subtype = objDivider.subtype;
+                // Grid spaces
+                data.posX = objDivider.X;
+                data.posZ = objDivider.Z;
+                data.orientation = objDivider.Orientation;
+            }
 
             string json = JsonUtility.ToJson(data, false);
             sb.AppendLine(json);
         }
 
-        File.WriteAllText(filepath, sb.ToString());
+        File.WriteAllText("Saves/" + filepath, sb.ToString());
     }
 
     void DeserializeKitchen()
     {
-        IEnumerable<string> jsonLines = File.ReadLines(filepath);
+        IEnumerable<string> jsonLines = File.ReadLines("Saves/" + filepath);
         foreach (string line in jsonLines)
         {
             SaveLoadObjects data = JsonUtility.FromJson<SaveLoadObjects>(line);
             if (data.type == "Tile")
             {
-                Instantiate(Tile);
-                Tile.GetComponent<Tile>().Deserialize(data.type, data.objName, data.posX, data.posZ);
-            } else if (data.type == "Divider")
+                GameObject newTile = Instantiate(Tile);
+                newTile.GetComponent<Tile>().Deserialize(data.subtype, data.posX, data.posZ, data.orientation);
+            }
+            else if (data.type == "Divider")
             {
-                Instantiate(Divider);
-                Divider.GetComponent<Divider>().Deserialize(data.type, data.objName, data.posX, data.posZ);
+                GameObject newDivider = Instantiate(Divider);
+                newDivider.GetComponent<Divider>().Deserialize(data.subtype, data.posX, data.posZ, data.orientation);
             }
         }
     }
@@ -62,7 +86,8 @@ public class KitchenSerializer : MonoBehaviour
 class SaveLoadObjects
 {
     public string type;
-    public string objName;
-    public float posX;
-    public float posZ;
+    public string subtype;
+    public int posX;
+    public int posZ;
+    public int orientation;
 }

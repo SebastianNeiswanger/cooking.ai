@@ -9,6 +9,7 @@ public class KitchenSerializer : MonoBehaviour
     public GameObject Tile;
     public string filepath;
     public bool DeserializeOnLoad;
+    private List<SerializedTile> data;
 
     private void Start()
     {
@@ -29,7 +30,7 @@ public class KitchenSerializer : MonoBehaviour
     void SerializeKitchen()
     {
         // Serialize grid objects
-        List<SaveLoadObjects> data = new List<SaveLoadObjects>();
+        data = new List<SerializedTile>();
         List<Transform> objects = new List<Transform>(gameObject.GetComponentsInChildren<Transform>());
 
         // Remove serializer object
@@ -39,7 +40,7 @@ public class KitchenSerializer : MonoBehaviour
         {
             GameObject obj = t.gameObject;
             Tile objTile = obj.GetComponent<Tile>();
-            data.Add(new SaveLoadObjects(obj.tag, objTile.X, objTile.Z, objTile.Orientation, objTile.State));
+            data.Add(new SerializedTile(obj.tag, objTile.X, objTile.Z, objTile.Orientation, objTile.State));
         }
 
         // Sort objects on grid
@@ -63,7 +64,7 @@ public class KitchenSerializer : MonoBehaviour
             {
                 if (data[index].posX != i || data[index].posZ != j)
                 {
-                    data.Insert(index, new SaveLoadObjects("Air", i, j, 0, 0));
+                    data.Insert(index, new SerializedTile("Air", i, j, 0, 0));
                 }
                 ++index;
             }
@@ -77,7 +78,7 @@ public class KitchenSerializer : MonoBehaviour
 
         // Add to json
         var sb = new StringBuilder();
-        foreach (SaveLoadObjects s in data) {
+        foreach (SerializedTile s in data) {
             string json = JsonUtility.ToJson(s, false);
             sb.AppendLine(json);
         }
@@ -88,33 +89,45 @@ public class KitchenSerializer : MonoBehaviour
     void DeserializeKitchen()
     {
         IEnumerable<string> jsonLines = File.ReadLines("Saves/" + filepath);
+        int x = 0;
+        int z = 0;
         foreach (string line in jsonLines)
         {
-            SaveLoadObjects data = JsonUtility.FromJson<SaveLoadObjects>(line);
+            SerializedTile tileData = JsonUtility.FromJson<SerializedTile>(line);
             // Don't create an air tile
-            if (data.type == "Air")
+            if (tileData.type != "Air")
             {
-                continue;
+                tileData.posX = x;
+                tileData.posZ = z;
+                // TODO: Instantiate prefab based on type
+                GameObject newTile = Instantiate(Tile, transform);
+                newTile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
             }
-            GameObject newTile = Instantiate(Tile, transform);
-            newTile.GetComponent<Tile>().Deserialize(data.type, data.posX, data.posZ, data.orientation, data.state);
+            if (++z >= 10)
+            {
+                z = 0;
+                ++x;
+            }
         }
     }
 }
 
-class SaveLoadObjects
+class SerializedTile
 {
-    public int posX;
-    public int posZ;
+    private int x;
+    private int z;
     public int orientation;
     public int state;
     public string type;
 
-    public SaveLoadObjects(string t, int x, int z, int o, int s)
+    public int posX { get => x; set => x = value; }
+    public int posZ { get => z; set => z = value; }
+
+    public SerializedTile(string t, int x, int z, int o, int s)
     {
         type = t;
-        posX = x;
-        posZ = z;
+        this.x = x;
+        this.z = z;
         orientation = o;
         state = s;
     }

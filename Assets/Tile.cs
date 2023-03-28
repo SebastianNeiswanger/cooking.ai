@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    public string subtype;
     private int x;
     private int z;
     private int orientation;
+    private int state;
 
     public int X { get => x; set => x = value; }
     public int Z { get => z; set => z = value; }
     public int Orientation { get => orientation; set => orientation = value; }
+    public int State { get => state; set => state = value; }
 
     private void Start()
     {
@@ -36,13 +37,17 @@ public class Tile : MonoBehaviour
 
         x = Convert.ToInt32(transform.position.x + 4.5);
         z = Convert.ToInt32(transform.position.z + 4.5);
+        state = 0;
     }
 
-    public void Deserialize(string subtype, int x, int z, int orientation)
+    public void Deserialize(string type, int x, int z, int orientation, int state)
     {
         this.x = x;
         this.z = z;
         this.orientation = orientation;
+        this.state = state;
+        gameObject.name = type;
+        gameObject.tag = type;
 
         // Set position and orientation
         transform.position = new Vector3((float)(x - 4.5f), 0, (float)(z - 4.5f));

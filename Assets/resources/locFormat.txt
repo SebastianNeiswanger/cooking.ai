@@ -1,0 +1,33 @@
+3 bits enum of values for a spot
+0: empty
+1: lettuce box
+2: tomato box
+3: buns box
+4: cheese fridge
+5: meat fridge
+6: oven
+7: counter
+
+contents:
+2 bits loc type enum:
+0: empty
+1: cutting board 
+2: plate stack
+3: delivery loc
+
+3 bits: ingredient contents
+	1: whole lettuce
+	2: whole tomato
+	3: whole cheese
+	4: uncooked meat
+6 bits construction
+{burger construction
+	1 bit: plate (y/n)
+	1 bit: buns (y/n)
+	1 bit: cooked meat (y/n)
+	1 bit: lettuce (y/n)
+	1 bit: cheese (y/n)
+	1 bit: tomato (y/n)
+}
+4 bits status
+(0-150% complete for cutting/cooking)

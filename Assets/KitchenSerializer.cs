@@ -6,7 +6,16 @@ using UnityEngine;
 
 public class KitchenSerializer : MonoBehaviour
 {
-    public GameObject Tile;
+    public GameObject Beef;
+    public GameObject Buns;
+    public GameObject Cheese;
+    public GameObject Counter;
+    public GameObject CuttingBoard;
+    public GameObject Lettuce;
+    public GameObject Oven;
+    public GameObject Plates;
+    public GameObject Table;
+    public GameObject Tomatoes;
     public string filepath;
     public bool DeserializeOnLoad;
     private List<SerializedTile> data;
@@ -22,23 +31,23 @@ public class KitchenSerializer : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.S))
         {
-            SerializeKitchen();
+            SerializeKitchen(true);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            GenerateRandomKitchen();
         }
     }
 
     // TODO: Add a bool to distinguish between sending to ML-Agent and writing to JSON file
-    void SerializeKitchen()
+    void SerializeKitchen(bool save)
     {
         // Serialize grid objects
         data = new List<SerializedTile>();
-        List<Transform> objects = new List<Transform>(gameObject.GetComponentsInChildren<Transform>());
 
-        // Remove serializer object
-        objects.RemoveAt(0);
-
-        foreach (Transform t in objects)
+        foreach (Transform child in transform)
         {
-            GameObject obj = t.gameObject;
+            GameObject obj = child.gameObject;
             Tile objTile = obj.GetComponent<Tile>();
             data.Add(new SerializedTile(obj.tag, objTile.X, objTile.Z, objTile.Orientation, objTile.State));
         }
@@ -75,33 +84,82 @@ public class KitchenSerializer : MonoBehaviour
             return;
         }
 
+        if (save)
+        {
+            // Write to file
+            var sb = new StringBuilder();
+            foreach (SerializedTile s in data)
+            {
+                string json = JsonUtility.ToJson(s, false);
+                sb.AppendLine(json);
+            }
 
-        // Add to json
-        var sb = new StringBuilder();
-        foreach (SerializedTile s in data) {
-            string json = JsonUtility.ToJson(s, false);
-            sb.AppendLine(json);
+            File.WriteAllText("Saves/" + filepath, sb.ToString());
         }
-
-        File.WriteAllText("Saves/" + filepath, sb.ToString());
     }
 
     void DeserializeKitchen()
     {
+        // Destroy any existing children
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
         IEnumerable<string> jsonLines = File.ReadLines("Saves/" + filepath);
         int x = 0;
         int z = 0;
         foreach (string line in jsonLines)
         {
             SerializedTile tileData = JsonUtility.FromJson<SerializedTile>(line);
-            // Don't create an air tile
-            if (tileData.type != "Air")
-            {
-                tileData.posX = x;
-                tileData.posZ = z;
-                // TODO: Instantiate prefab based on type
-                GameObject newTile = Instantiate(Tile, transform);
-                newTile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+            
+            // Create tiles
+            tileData.posX = x;
+            tileData.posZ = z;
+            GameObject tile;
+            switch (tileData.type) {
+                case "Beef":
+                    tile = Instantiate(Beef, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "Buns":
+                    tile = Instantiate(Buns, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "Cheese":
+                    tile = Instantiate(Cheese, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "Counter":
+                    tile = Instantiate(Counter, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "CuttingBoard":
+                    tile = Instantiate(CuttingBoard, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "Lettuce":
+                    tile = Instantiate(Lettuce, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "Oven":
+                    tile = Instantiate(Oven, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "Plates":
+                    tile = Instantiate(Plates, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "Table":
+                    GameObject newTile = Instantiate(Table, transform);
+                    newTile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                case "Tomatoes":
+                    tile = Instantiate(Tomatoes, transform);
+                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    break;
+                default:
+                    break;
             }
             if (++z >= 10)
             {
@@ -110,6 +168,71 @@ public class KitchenSerializer : MonoBehaviour
             }
         }
     }
+
+    void GenerateRandomKitchen()
+    {
+        data = new List<SerializedTile>();
+        for (int i = 0; i < 10; ++i)
+        {
+            for (int j = 0; j < 10; ++j)
+            {
+                int typeInt = Random.Range(0, 50);
+                string type;
+                switch (typeInt)
+                {
+                    case 0:
+                        type = "Buns";
+                        break;
+                    case 1:
+                        type = "Beef";
+                        break;
+                    case 2:
+                        type = "Cheese";
+                        break;
+                    case 3:
+                    case 10:
+                    case 11:
+                    case 12:
+                    case 13:
+                    case 14:
+                        type = "Counter";
+                        break;
+                    case 4:
+                        type = "CuttingBoard";
+                        break;
+                    case 5:
+                        type = "Lettuce";
+                        break;
+                    case 6:
+                        type = "Oven";
+                        break;
+                    case 7:
+                        type = "Plates";
+                        break;
+                    case 8:
+                        type = "Table";
+                        break;
+                    case 9:
+                        type = "Tomatoes";
+                        break;
+                    default:
+                        type = "Air";
+                        break;
+                }
+                data.Add(new SerializedTile(type, i, j, 0, 0));
+            }
+        }
+        var sb = new StringBuilder();
+        foreach (SerializedTile s in data)
+        {
+            string json = JsonUtility.ToJson(s, false);
+            sb.AppendLine(json);
+        }
+
+        File.WriteAllText("Saves/" + filepath, sb.ToString());
+        DeserializeKitchen();
+    }
+
 }
 
 class SerializedTile

@@ -33,7 +33,7 @@ public class KitchenSerializer : MonoBehaviour
         {
             SerializeKitchen(true);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.R))
         {
             GenerateRandomKitchen();
         }
@@ -71,7 +71,7 @@ public class KitchenSerializer : MonoBehaviour
         {
             for (int j = 0; j < 10; ++j)
             {
-                if (data[index].posX != i || data[index].posZ != j)
+                if (index == data.Count || data[index].posX != i || data[index].posZ != j)
                 {
                     data.Insert(index, new SerializedTile("Air", i, j, 0, 0));
                 }

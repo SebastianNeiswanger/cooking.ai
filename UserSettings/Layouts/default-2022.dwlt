@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 123
+  controlID: 67
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 67
+  controlID: 68
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 68
+  controlID: 69
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -317,22 +317,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/models
+    - Assets/resources
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/models
+  - Assets/resources
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\swocc\Desktop\Misc resources\Blend files\cooking.ai
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c6630000
-    m_LastClickedID: 25542
-    m_ExpandedIDs: 0000000064630000c663000000ca9a3bffffff7f
+    m_SelectedIDs: ce630000
+    m_LastClickedID: 25550
+    m_ExpandedIDs: 0000000068630000cc63000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -360,7 +360,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000064630000
+    m_ExpandedIDs: 0000000068630000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -487,10 +487,10 @@ MonoBehaviour:
     m_SaveData: []
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 66f2ffff8cf9ffffd8f4ffff
-      m_LastClickedID: -3482
-      m_ExpandedIDs: b2f6ffff02f8fffffcf9ffff32fbffff
+      scrollPos: {x: 0, y: 456.4}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 807affffe286ffff1eefffff68efffff2efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -506,7 +506,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 4}
+        m_ClientGUIView: {fileID: 0}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -772,9 +772,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 17.655764, y: 1.5794429, z: -2.4420643}
+    m_Target: {x: 17.276041, y: 1.4646014, z: -0.85990036}
     speed: 2
-    m_Value: {x: 17.655764, y: 1.5794429, z: -2.4420643}
+    m_Value: {x: 17.276041, y: 1.4646014, z: -0.85990036}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -820,17 +820,17 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.058241315, y: 0.2604978, z: -0.015796596, w: -0.9635954}
+    m_Target: {x: -0.17959692, y: 0.1852898, z: -0.034442473, w: -0.965524}
     speed: 2
-    m_Value: {x: -0.058287952, y: 0.2576037, z: -0.015621671, w: -0.96436447}
+    m_Value: {x: -0.18104407, y: 0.18523698, z: -0.034720197, w: -0.9652486}
   m_Size:
-    m_Target: 3.312002
+    m_Target: 7.13871
     speed: 2
-    m_Value: 3.4680648
+    m_Value: 7.13871
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
+    m_Value: 1
   m_CameraSettings:
     m_Speed: 1
     m_SpeedNormalized: 0.5

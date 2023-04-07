@@ -35,8 +35,8 @@ public class Tile : MonoBehaviour
             orientation = 0;
         }
 
-        x = Convert.ToInt32(transform.position.x + 4.5);
-        z = Convert.ToInt32(transform.position.z + 4.5);
+        x = Convert.ToInt32(transform.position.x);
+        z = Convert.ToInt32(transform.position.z);
         state = 0;
     }
 
@@ -50,7 +50,7 @@ public class Tile : MonoBehaviour
         gameObject.tag = type;
 
         // Set position and orientation
-        transform.position = new Vector3((float)(x - 4.5f), 0, (float)(z - 4.5f));
+        transform.position = new Vector3(x, 0, z);
         switch (orientation)
         {
             case 0:

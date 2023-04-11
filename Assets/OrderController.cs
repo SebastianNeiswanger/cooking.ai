@@ -17,23 +17,20 @@ public class OrderController : MonoBehaviour
     // Returns order number
     int CreateNewOrder()
     {
-        // get random entree
-        Array values = Enum.GetValues(typeof(entree));
         System.Random random = new System.Random();
-        entree randomEntree = (entree)values.GetValue(random.Next(values.Length));
-
         // get random ingredients
-        values = Enum.GetValues(typeof(ingredient));
-        int numIngredients = random.Next(values.Length + 1);
+        Array values = Enum.GetValues(typeof(ingredient));
+        int numIngredients = random.Next(values.Length + 1); // between 0 and numIngredients
         // Create list of random ingredients
-        List<ingredient> ingredientList = new List<ingredient>();
+        List<ingredient> ingredients = new List<ingredient>();
         for (int i = 0; i < numIngredients; ++i)
         {
-            ingredientList.Add((ingredient)values.GetValue(random.Next(values.Length)));
+            int randIngredientValue = Convert.ToInt32(Math.Pow(2, (random.Next(4, 4 + values.Length))));
+            ingredients.Add((ingredient)values.GetValue(randIngredientValue));
         }
 
         int orderNum = openOrders.Count + completeOrders.Count;
-        openOrders.Add(orderNum, new Order(randomEntree, ingredientList));
+        openOrders.Add(orderNum, new Order(ingredients));
 
         return orderNum;
     }
@@ -58,28 +55,41 @@ public class OrderController : MonoBehaviour
             throw new KeyNotFoundException("Order " + orderNum.ToString() + " not found");
         }
     }
-}
 
-enum entree
-{
-    burger
+    public List<int> SendOrdersToAgent()
+    {
+        List<int> observations = new List<int>();
+        foreach ((int index, Order o) in openOrders)
+        {
+            observations.Add(o.GetSerializedIngredients());
+        }
+        return observations;
+    }
 }
 
 // TODO: Make an entree -> ingredient dictionary
 enum ingredient
-{
-    lettuce,
-    cheese,
-    tomato
+{ // uncookedBeef, cookedBeef, buns, and plate are 1, 2, 4, and 8
+    cheese = 16,
+    tomato = 32,
+    lettuce = 64,
 }
 class Order
 {
-    private entree foodType;
     private List<ingredient> ingredients;
 
-    public Order(entree type, List<ingredient> i)
+    public Order(List<ingredient> i)
     {
-        foodType = type;
-        ingredients = i;
+        ingredients = i;        
+    }
+
+    public int GetSerializedIngredients()
+    {
+        int serialized = 7; // Beef, buns, and plate
+        foreach (ingredient i in ingredients)
+        {
+            serialized += (int)i;
+        }
+        return serialized;
     }
 }

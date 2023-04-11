@@ -237,7 +237,7 @@ public class KitchenSerializer : MonoBehaviour
         DeserializeKitchen();
     }
 
-    void UpdateTileState(int tileX, int tileZ, int newState)
+    public void UpdateTileState(int tileX, int tileZ, int newState)
     {
         int index = (10 * tileX) + tileZ;
         if (index < 0 || index > data.Count)
@@ -256,7 +256,6 @@ public class KitchenSerializer : MonoBehaviour
             observations.Add((int) tile.type);
             observations.Add(tile.orientation);
             observations.Add(tile.state);
-            observations.Add(tile.burgerState);
         }
         return observations;
     }
@@ -282,22 +281,12 @@ class SerializedTile
 {
     private int x;
     private int z;
-    private int bugerState;
-    // Burger states (flags):
-    // 1: uncooked beef
-    // 2: cooked beef
-    // 4: buns
-    // 8: plate
-    // 16: cheese
-    // 32: tomato
-    // 64: lettuce
     public int orientation;
     public int state;
     public TileType type;
 
     public int posX { get => x; set => x = value; }
     public int posZ { get => z; set => z = value; }
-    public int burgerState { get => bugerState; set => bugerState = value; }
 
     public SerializedTile(string t, int x, int z, int o, int s, int b)
     {
@@ -310,6 +299,5 @@ class SerializedTile
         this.z = z;
         orientation = o;
         state = s;
-        burgerState = b;
     }
 }

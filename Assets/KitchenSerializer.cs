@@ -136,7 +136,7 @@ public class KitchenSerializer : MonoBehaviour
                     break;
                 case TileType.Counter:
                     tile = Instantiate(Counter, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<Counter>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case TileType.CuttingBoard:
                     tile = Instantiate(CuttingBoard, transform);
@@ -156,7 +156,7 @@ public class KitchenSerializer : MonoBehaviour
                     break;
                 case TileType.Table:
                     GameObject newTile = Instantiate(Table, transform);
-                    newTile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    newTile.GetComponent<Table>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case TileType.Tomatoes:
                     tile = Instantiate(Tomatoes, transform);

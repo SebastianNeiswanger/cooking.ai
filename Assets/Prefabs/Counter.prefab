@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6703228086018115745}
   - component: {fileID: 6703228086018115746}
-  - component: {fileID: 6703228086018115750}
+  - component: {fileID: 2286450306088584366}
   m_Layer: 0
   m_Name: Counter
   m_TagString: Counter
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6703228086018115750
+--- !u!114 &2286450306088584366
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6703228086018115773}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a04af43289b1d6841989e710aec7f52a, type: 3}
+  m_Script: {fileID: 11500000, guid: 945f4a3aa996d624f8ac7a1910c9f627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4012767037177110604

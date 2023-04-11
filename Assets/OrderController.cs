@@ -54,7 +54,7 @@ public class OrderController : MonoBehaviour
         return orderNum;
     }
 
-    public void CompleteOrder(int burger)
+    public bool CompleteOrder(int burger)
     {
         foreach ((int index, Order order) in openOrders)
         {
@@ -62,10 +62,10 @@ public class OrderController : MonoBehaviour
             {
                 openOrders.Remove(index);
                 completeOrders.Add(index, order);
-                // Give reward?
-                break;
+                return true;
             }
         }
+        return false;
     }
 
     // Complete order by orderNum. This may be useful later, or for something else

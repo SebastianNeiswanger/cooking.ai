@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Counter : Tile
+public class CounterTile : Tile
 {
     override public int Interact(int hand)
     {
@@ -31,7 +31,6 @@ public class Counter : Tile
     }
     private bool hasUnprepared(int burger)
     {
-        // bitfield
         return (burger & (1 + 16 + 64 + 256)) != 0;
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 289021326970135950}
   - component: {fileID: 289021326970135949}
-  - component: {fileID: 289021326970135945}
+  - component: {fileID: 3889269183408923054}
   m_Layer: 0
   m_Name: Plates
   m_TagString: Plates
@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 9140799405430715552}
   m_Father: {fileID: 0}
-  m_RootOrder: 25
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &289021326970135949
 BoxCollider:
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &289021326970135945
+--- !u!114 &3889269183408923054
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 289021326970135954}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a04af43289b1d6841989e710aec7f52a, type: 3}
+  m_Script: {fileID: 11500000, guid: 862ce6d4cce783a41bd0c57c79a14e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8367857213520970135

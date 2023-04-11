@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1032526914447585048}
   - component: {fileID: 1032526914447585051}
-  - component: {fileID: 1032526914447585055}
+  - component: {fileID: 5280900422828510497}
   m_Layer: 0
   m_Name: CuttingBoard
   m_TagString: CuttingBoard
@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 8330008377441542785}
   m_Father: {fileID: 0}
-  m_RootOrder: 23
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1032526914447585051
 BoxCollider:
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1032526914447585055
+--- !u!114 &5280900422828510497
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1032526914447585028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a04af43289b1d6841989e710aec7f52a, type: 3}
+  m_Script: {fileID: 11500000, guid: 966cbfc1438b98a4984d5514760226ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &8363354937410382688

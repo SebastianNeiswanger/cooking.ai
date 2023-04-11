@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+abstract public class Tile : MonoBehaviour
 {
     protected KitchenSerializer kitchen;
     protected int x;
@@ -74,10 +74,5 @@ public class Tile : MonoBehaviour
     }
 
     // Takes the burger which is currently in the hand and returns the burger to be put in the hand.
-    virtual public int Interact(int hand)
-    {
-        // Override this
-        // TODO: once all classes are made, replace this virtual with abstract
-        return 0;
-    }
+    abstract public int Interact(int hand);
 }

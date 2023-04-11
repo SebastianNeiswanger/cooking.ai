@@ -122,45 +122,45 @@ public class KitchenSerializer : MonoBehaviour
             // Create tiles
             GameObject tile;
             switch (tileData.type) {
-                case TileType.Beef:
+                case "Beef":
                     tile = Instantiate(Beef, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<BeefTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.Buns:
+                case "Buns":
                     tile = Instantiate(Buns, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<BunsTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.Cheese:
+                case "Cheese":
                     tile = Instantiate(Cheese, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<CheeseTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.Counter:
+                case "Counter":
                     tile = Instantiate(Counter, transform);
-                    tile.GetComponent<Counter>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<CounterTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.CuttingBoard:
+                case "CuttingBoard":
                     tile = Instantiate(CuttingBoard, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<CuttingTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.Lettuce:
+                case "Lettuce":
                     tile = Instantiate(Lettuce, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<LettuceTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.Oven:
+                case "Oven":
                     tile = Instantiate(Oven, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<OvenTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.Plates:
+                case "Plates":
                     tile = Instantiate(Plates, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<PlatesTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.Table:
-                    GameObject newTile = Instantiate(Table, transform);
-                    newTile.GetComponent<Table>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                case "Table":
+                    tile = Instantiate(Table, transform);
+                    tile.GetComponent<TableTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
-                case TileType.Tomatoes:
+                case "Tomatoes":
                     tile = Instantiate(Tomatoes, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<TomatoTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 default:
                     break;
@@ -253,7 +253,7 @@ public class KitchenSerializer : MonoBehaviour
         List<int> observations = new List<int>();
         foreach (SerializedTile tile in data)
         {
-            observations.Add((int) tile.type);
+            observations.Add(tile.getTypeInt());
             observations.Add(tile.orientation);
             observations.Add(tile.state);
         }
@@ -262,42 +262,53 @@ public class KitchenSerializer : MonoBehaviour
 
 }
 
-enum TileType
-{
-    Air,
-    Beef,
-    Buns,
-    Cheese,
-    Counter,
-    CuttingBoard,
-    Lettuce,
-    Oven,
-    Plates,
-    Table,
-    Tomatoes,
-}
-
 class SerializedTile
 {
     private int x;
     private int z;
     public int orientation;
     public int state;
-    public TileType type;
+    public string type;
 
     public int posX { get => x; set => x = value; }
     public int posZ { get => z; set => z = value; }
 
     public SerializedTile(string t, int x, int z, int o, int s, int b)
     {
-        if (!Enum.TryParse<TileType>(t, out type))
-        {
-            Debug.LogError("Cound not parse type: " + t);
-            type = TileType.Air;
-        }
+        type = t;
+        Debug.Log(type.ToString());
         this.x = x;
         this.z = z;
         orientation = o;
         state = s;
+    }
+
+    public int getTypeInt()
+    {
+        switch (type)
+        {
+            case "Beef":
+                return 0;
+            case "Buns":
+                return 1;
+            case "Cheese":
+                return 2;
+            case "Counter":
+                return 3;
+            case "CuttingBoard":
+                return 4;
+            case "Lettuce":
+                return 5;
+            case "Oven":
+                return 6;
+            case "Plates":
+                return 7;
+            case "Table":
+                return 8;
+            case "Tomatoes":
+                return 9;
+            default:
+                return -1;
+        }
     }
 }

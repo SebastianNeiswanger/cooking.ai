@@ -672,7 +672,7 @@ MonoBehaviour:
   Plates: {fileID: 289021326970135954, guid: 25e754ac4e85d2947b82beca4e79221c, type: 3}
   Table: {fileID: 364543940379627541, guid: 4f1fce5e05a8f164aaa4eabcf533528c, type: 3}
   Tomatoes: {fileID: 1341321899759213614, guid: 50d5a051f792ca54bb75d29eafbc8a33, type: 3}
-  filepath: RandomKitchen0.json
+  filepath: TestKitchen.json
   DeserializeOnLoad: 1
 --- !u!4 &799454735
 Transform:
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 3
+    VectorObservationSize: 308
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 2
@@ -983,6 +983,8 @@ MonoBehaviour:
   hasUpgradedFromAgentParameters: 1
   MaxStep: 10000
   moveSpeed: 3
+  kitchen: {fileID: 799454734}
+  oc: {fileID: 2111776218}
 --- !u!136 &1669553090
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -35,7 +35,7 @@ public class PlayerAgent : Agent
 
 
         // Tiles and burgers
-        // Should be 400 values: type, orientation, state, burgerState
+        // Should be 300 values: type, orientation, state
         foreach (int i in kitchen.SendStateToAgent())
         {
             sensor.AddObservation(i);

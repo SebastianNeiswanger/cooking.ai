@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1341321899759213618}
   - component: {fileID: 1341321899759213617}
-  - component: {fileID: 1341321899759213621}
+  - component: {fileID: 6410840045260623529}
   m_Layer: 0
   m_Name: Tomatoes
   m_TagString: Tomatoes
@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 5952334744026990984}
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1341321899759213617
 BoxCollider:
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1341321899759213621
+--- !u!114 &6410840045260623529
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1341321899759213614}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a04af43289b1d6841989e710aec7f52a, type: 3}
+  m_Script: {fileID: 11500000, guid: 3fe9f933dc5e2d14bbfb3ad3d05042f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &526495973154292100

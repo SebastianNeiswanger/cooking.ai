@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4781086885043201268}
   - component: {fileID: 4781086885043201271}
-  - component: {fileID: 4781086885043201267}
+  - component: {fileID: 6948967018254122912}
   m_Layer: 0
   m_Name: Lettuce
   m_TagString: Lettuce
@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 3908623903637208221}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4781086885043201271
 BoxCollider:
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4781086885043201267
+--- !u!114 &6948967018254122912
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4781086885043201256}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a04af43289b1d6841989e710aec7f52a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2978ad8f78ad79b4b9854fe06eb660a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &7199766097822594193

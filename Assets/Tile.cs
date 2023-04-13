@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+abstract public class Tile : MonoBehaviour
 {
-    private int x;
-    private int z;
-    private int orientation;
-    private int state;
+    protected KitchenSerializer kitchen;
+    protected int x;
+    protected int z;
+    protected int orientation;
+    protected int state;
 
     public int X { get => x; set => x = value; }
     public int Z { get => z; set => z = value; }
@@ -17,6 +18,7 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
+        kitchen = transform.parent.GetComponent<KitchenSerializer>();
         // This could be cleaned up. Orientation is based on current rotation
         if (transform.rotation.eulerAngles.y >= 45 && transform.rotation.eulerAngles.y <= 135)
         {
@@ -69,6 +71,8 @@ public class Tile : MonoBehaviour
                 Debug.LogError("Invalid orientation");
                 break;
         }
-
     }
+
+    // Takes the burger which is currently in the hand and returns the burger to be put in the hand.
+    abstract public int Interact(int hand);
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4936932843875185154}
   - component: {fileID: 4936932843875185153}
-  - component: {fileID: 4936932843875185157}
+  - component: {fileID: 63515361454118400}
   m_Layer: 0
   m_Name: Beef
   m_TagString: Beef
@@ -32,7 +32,7 @@ Transform:
   m_Children:
   - {fileID: 6476540377952138908}
   m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4936932843875185153
 BoxCollider:
@@ -47,7 +47,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4936932843875185157
+--- !u!114 &63515361454118400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4936932843875185182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a04af43289b1d6841989e710aec7f52a, type: 3}
+  m_Script: {fileID: 11500000, guid: 7e8c0883da55b0f4188a6bce6dfa8393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &2345868746250053814

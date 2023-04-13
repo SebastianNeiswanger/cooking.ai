@@ -9,6 +9,8 @@ public class PlayerAgent : Agent
 {
     CharacterController cc;
     public float moveSpeed;
+    public KitchenSerializer kitchen;
+    public OrderController oc;
 
     void Start()
     {
@@ -23,7 +25,36 @@ public class PlayerAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(transform.localPosition);
+        // Agent Position
+        sensor.AddObservation(transform.localPosition.x);
+        sensor.AddObservation(transform.localPosition.z);
+
+
+        // TODO: Agent burger (what is he holding)
+        sensor.AddObservation(0);
+
+
+        // Tiles and burgers
+        // Should be 300 values: type, orientation, state
+        foreach (int i in kitchen.SendStateToAgent())
+        {
+            sensor.AddObservation(i);
+        }
+
+
+        // Orders
+        List<int> orders = oc.SendOrdersToAgent();
+        // Up to 5 orders can be sent to the agent
+        for (int i = 0; i < 5; ++i)
+        {
+            if (orders.Count > i)
+            {
+                sensor.AddObservation(orders[i]);
+            } else
+            {
+                sensor.AddObservation(0);
+            }
+        }
     }
 
     public override void OnActionReceived(ActionBuffers actionBuffers)

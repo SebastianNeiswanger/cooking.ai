@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
+using System;
 
 public class KitchenSerializer : MonoBehaviour
 {
@@ -39,8 +40,7 @@ public class KitchenSerializer : MonoBehaviour
         }
     }
 
-    // TODO: Add a bool to distinguish between sending to ML-Agent and writing to JSON file
-    void SerializeKitchen(bool save)
+    void SerializeKitchen(bool saveToFile)
     {
         // Serialize grid objects
         data = new List<SerializedTile>();
@@ -49,7 +49,7 @@ public class KitchenSerializer : MonoBehaviour
         {
             GameObject obj = child.gameObject;
             Tile objTile = obj.GetComponent<Tile>();
-            data.Add(new SerializedTile(obj.tag, objTile.X, objTile.Z, objTile.Orientation, objTile.State));
+            data.Add(new SerializedTile(obj.tag, objTile.X, objTile.Z, objTile.Orientation, objTile.State, 0));
         }
 
         // Sort objects on grid
@@ -73,7 +73,7 @@ public class KitchenSerializer : MonoBehaviour
             {
                 if (index == data.Count || data[index].posX != i || data[index].posZ != j)
                 {
-                    data.Insert(index, new SerializedTile("Air", i, j, 0, 0));
+                    data.Insert(index, new SerializedTile("Air", i, j, 0, 0, 0));
                 }
                 ++index;
             }
@@ -84,7 +84,7 @@ public class KitchenSerializer : MonoBehaviour
             return;
         }
 
-        if (save)
+        if (saveToFile)
         {
             // Write to file
             var sb = new StringBuilder();
@@ -105,6 +105,7 @@ public class KitchenSerializer : MonoBehaviour
         {
             GameObject.Destroy(child.gameObject);
         }
+        data = new List<SerializedTile>();
 
         IEnumerable<string> jsonLines = File.ReadLines("Saves/" + filepath);
         int x = 0;
@@ -113,50 +114,53 @@ public class KitchenSerializer : MonoBehaviour
         {
             SerializedTile tileData = JsonUtility.FromJson<SerializedTile>(line);
             
-            // Create tiles
             tileData.posX = x;
             tileData.posZ = z;
+
+            data.Add(tileData);
+
+            // Create tiles
             GameObject tile;
             switch (tileData.type) {
                 case "Beef":
                     tile = Instantiate(Beef, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<BeefTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "Buns":
                     tile = Instantiate(Buns, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<BunsTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "Cheese":
                     tile = Instantiate(Cheese, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<CheeseTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "Counter":
                     tile = Instantiate(Counter, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<CounterTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "CuttingBoard":
                     tile = Instantiate(CuttingBoard, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<CuttingTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "Lettuce":
                     tile = Instantiate(Lettuce, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<LettuceTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "Oven":
                     tile = Instantiate(Oven, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<OvenTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "Plates":
                     tile = Instantiate(Plates, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<PlatesTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "Table":
-                    GameObject newTile = Instantiate(Table, transform);
-                    newTile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile = Instantiate(Table, transform);
+                    tile.GetComponent<TableTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 case "Tomatoes":
                     tile = Instantiate(Tomatoes, transform);
-                    tile.GetComponent<Tile>().Deserialize(tileData.type, tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
+                    tile.GetComponent<TomatoTile>().Deserialize(tileData.type.ToString(), tileData.posX, tileData.posZ, tileData.orientation, tileData.state);
                     break;
                 default:
                     break;
@@ -176,7 +180,7 @@ public class KitchenSerializer : MonoBehaviour
         {
             for (int j = 0; j < 10; ++j)
             {
-                int typeInt = Random.Range(0, 50);
+                int typeInt = UnityEngine.Random.Range(0, 50);
                 string type;
                 switch (typeInt)
                 {
@@ -219,7 +223,7 @@ public class KitchenSerializer : MonoBehaviour
                         type = "Air";
                         break;
                 }
-                data.Add(new SerializedTile(type, i, j, 0, 0));
+                data.Add(new SerializedTile(type, i, j, 0, 0, 0));
             }
         }
         var sb = new StringBuilder();
@@ -231,6 +235,29 @@ public class KitchenSerializer : MonoBehaviour
 
         File.WriteAllText("Saves/" + filepath, sb.ToString());
         DeserializeKitchen();
+    }
+
+    public void UpdateTileState(int tileX, int tileZ, int newState)
+    {
+        int index = (10 * tileX) + tileZ;
+        if (index < 0 || index > data.Count)
+        {
+            Debug.LogError("Ignoring invalid tile update request: (" + tileX + ", " + tileZ + ", " + newState + ")");
+            return;
+        }
+        data[index].state = newState;
+    }
+
+    public List<int> SendStateToAgent()
+    {
+        List<int> observations = new List<int>();
+        foreach (SerializedTile tile in data)
+        {
+            observations.Add(tile.getTypeInt());
+            observations.Add(tile.orientation);
+            observations.Add(tile.state);
+        }
+        return observations;
     }
 
 }
@@ -246,12 +273,42 @@ class SerializedTile
     public int posX { get => x; set => x = value; }
     public int posZ { get => z; set => z = value; }
 
-    public SerializedTile(string t, int x, int z, int o, int s)
+    public SerializedTile(string t, int x, int z, int o, int s, int b)
     {
         type = t;
+        Debug.Log(type.ToString());
         this.x = x;
         this.z = z;
         orientation = o;
         state = s;
+    }
+
+    public int getTypeInt()
+    {
+        switch (type)
+        {
+            case "Beef":
+                return 0;
+            case "Buns":
+                return 1;
+            case "Cheese":
+                return 2;
+            case "Counter":
+                return 3;
+            case "CuttingBoard":
+                return 4;
+            case "Lettuce":
+                return 5;
+            case "Oven":
+                return 6;
+            case "Plates":
+                return 7;
+            case "Table":
+                return 8;
+            case "Tomatoes":
+                return 9;
+            default:
+                return -1;
+        }
     }
 }

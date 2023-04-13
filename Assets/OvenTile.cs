@@ -4,11 +4,31 @@ using UnityEngine;
 
 public class OvenTile : Tile
 {
-    // TODO: Implement cooking time
     // States
     // 0: empty
     // 1: uncooked
     // 2: cooked
+
+    private float cookingPercent;
+
+    private void Start()
+    {
+        cookingPercent = 0;
+    }
+
+    private void FixedUpdate()
+    {
+        if (state == 1)
+        {
+            // cooking speed
+            cookingPercent += 0.8f;
+            if (cookingPercent >= 100f)
+            {
+                state = 2;
+                cookingPercent = 0;
+            }
+        }
+    }
 
     override public int Interact(int hand)
     {
@@ -23,10 +43,11 @@ public class OvenTile : Tile
         else if (state == 1 && hand == 0)
         {
             newHand = 1;
+            cookingPercent = 0f;
             state = 0;
         }
         // Else if the oven has cookedBeef and the hand does not have unprepared ingredients or cookedBeef, add cookedBeef to hand
-        else if (hasCookedBeeforUnprepared(hand))
+        else if (state == 2 && hasCookedBeeforUnprepared(hand))
         {
             newHand = 2 + hand;
             state = 0;

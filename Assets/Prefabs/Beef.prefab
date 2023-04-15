@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4936932843875185154}
-  - component: {fileID: 4936932843875185153}
   - component: {fileID: 63515361454118400}
   m_Layer: 0
   m_Name: Beef
@@ -34,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4936932843875185153
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4936932843875185182}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &63515361454118400
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,6 +116,25 @@ PrefabInstance:
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 9633b0441f690ed4f89b9001d975c218, type: 3}
+--- !u!1 &2728999462688574156 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 383203714244289146, guid: 9633b0441f690ed4f89b9001d975c218, type: 3}
+  m_PrefabInstance: {fileID: 2345868746250053814}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &7006994646602391527
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2728999462688574156}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4560855401624191757, guid: 8c8fd21bcabff6b498eedf3dd83c8630, type: 3}
 --- !u!4 &6476540377952138908 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8750344657367686698, guid: 9633b0441f690ed4f89b9001d975c218, type: 3}

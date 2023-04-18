@@ -4,12 +4,31 @@ using UnityEngine;
 
 public class CuttingTile : Tile
 {
-    // When something is being cut, the player will be locked into the cutting animation and cannot move unless they stop cutting.
-    // TODO: Implement cutting animation/time
+    // When something is being cut, the player should be locked in the cutting animation until it is complete
     // State
     // 0: empty
     // 1: cutting
     // 3: finished cutting
+
+    private float cuttingPercent;
+
+    private void Start()
+    {
+        cuttingPercent = 0f;
+    }
+
+    private void FixedUpdate()
+    {
+        if (state == 1)
+        {
+            cuttingPercent += 1f;
+            if (cuttingPercent >= 100)
+            {
+                state = 2;
+                cuttingPercent = 0f;
+            }
+        }
+    }
 
     override public int Interact(int hand)
     {
@@ -28,11 +47,10 @@ public class CuttingTile : Tile
                 return hand;
             }
         }
-        // If the player is cutting, the player stops cutting
+        // If the player is cutting, the player continues to cut
         else if (state == 1)
         {
-            state = 0;
-            return hand;
+            return -1;
         }
         // Else, cutting animation is complete, give player cutTomato/cutCheese/cutLettuce
         else

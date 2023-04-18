@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4936932843875185154}
   - component: {fileID: 63515361454118400}
+  - component: {fileID: 3766203869750201732}
   m_Layer: 0
   m_Name: Beef
   m_TagString: Beef
@@ -45,6 +46,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e8c0883da55b0f4188a6bce6dfa8393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &3766203869750201732
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4936932843875185182}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.85419786, y: 1, z: 0.8562724}
+  m_Center: {x: 0.072901845, y: 0, z: 0.026876112}
 --- !u!1001 &2345868746250053814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -130,7 +144,7 @@ MeshCollider:
   m_GameObject: {fileID: 2728999462688574156}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30

@@ -1,5 +1,5 @@
 behaviors:
-  AdvancedCollector:
+  cooking:
     trainer_type: ppo
     hyperparameters:
       batch_size: 128
@@ -35,7 +35,7 @@ environment_parameters:
       - name: Lesson0 # This is the start of the second lesson
         completion_criteria:
           measure: reward
-          behavior: AdvancedCollector
+          behavior: cooking
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 1.5
@@ -47,7 +47,7 @@ environment_parameters:
       - name: Lesson1
         completion_criteria:
           measure: reward
-          behavior: AdvancedCollector
+          behavior: cooking
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 1.8
@@ -59,7 +59,7 @@ environment_parameters:
       - name: Lesson2
         completion_criteria:
           measure: reward
-          behavior: AdvancedCollector
+          behavior: cooking
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 1.8
@@ -71,7 +71,7 @@ environment_parameters:
       - name: Lesson3
         completion_criteria:
           measure: reward
-          behavior: AdvancedCollector
+          behavior: cooking
           signal_smoothing: true
           min_lesson_length: 100
           threshold: 1.8

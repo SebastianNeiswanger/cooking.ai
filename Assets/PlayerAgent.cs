@@ -20,11 +20,7 @@ public class PlayerAgent : Agent
         rewardGroup = (int) Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup);
     }
 
-    // TODO: Set rewards based on rewardGroup
-    private void Update()
-    {
-        
-    }
+    // TODO: Set rewards based on rewardGroup.
 
     public override void OnEpisodeBegin()
     {
@@ -41,6 +37,7 @@ public class PlayerAgent : Agent
 
         // Reset orders
         oc.ResetOrders();
+        oc.CreateNewOrder(686); // Full burger
 
         // TODO: Clear hand
     }

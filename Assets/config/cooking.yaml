@@ -30,7 +30,7 @@ behaviors:
     summary_freq: 20000
     threaded: true
 environment_parameters:
-  block_offset:
+  rewardGroup:
     curriculum:
       - name: Lesson0 # This is the start of the second lesson
         completion_criteria:

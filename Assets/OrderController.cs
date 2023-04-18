@@ -30,22 +30,23 @@ public class OrderController : MonoBehaviour
             {
                 switch (random.Next(3))
                 {
+                    // If burger does not have given ingredient, add it to burger
                     case 0:
-                        if (((ingredient) burger & ingredient.cutCheese) == ingredient.cutCheese)
+                        if (((ingredient) burger & ingredient.cutCheese) == 0)
                         {
                             burger += (int) ingredient.cutCheese;
                             ++i;
                         }
                         break;
                     case 1:
-                        if (((ingredient)burger & ingredient.cutLettuce) == ingredient.cutLettuce)
+                        if (((ingredient)burger & ingredient.cutLettuce) == 0)
                         {
                             burger += (int)ingredient.cutLettuce;
                             ++i;
                         }
                         break;
                     case 2:
-                        if (((ingredient)burger & ingredient.cutTomato) == ingredient.cutTomato)
+                        if (((ingredient)burger & ingredient.cutTomato) == 0)
                         {
                             burger += (int)ingredient.cutTomato;
                             ++i;

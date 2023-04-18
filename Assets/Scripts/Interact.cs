@@ -5,7 +5,7 @@ using UnityEngine;
 public class Interact : MonoBehaviour
 {
     private bool insideObject;
-    private Collider currentTile;
+    private Collider currentTile = null;
     private int hand;
     public GameObject agent;
     private CharacterCtrl controller;
@@ -42,12 +42,14 @@ public class Interact : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         insideObject = false;
+        currentTile = null;
         Debug.Log("Left " + other);
     }
 
     // Helper function that runs interact and 
     private void helper(Collider tile)
     {
+        if (tile == null) { return; }
         int returnedHand = tile.GetComponent<Tile>().Interact(hand);
         Debug.Log(returnedHand + " from " + tile);
         hand = returnedHand;

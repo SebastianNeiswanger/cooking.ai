@@ -5,9 +5,12 @@ using UnityEngine;
 public class HeuristcMove : MonoBehaviour
 {
     private CharacterCtrl characterController;
+    public GameObject interactionObj;
+    private Interact intr;
     // Start is called before the first frame update
     void Start()
     {
+        intr = interactionObj.GetComponent<Interact>();
         characterController = GetComponent<CharacterCtrl>();
     }
 
@@ -59,6 +62,11 @@ public class HeuristcMove : MonoBehaviour
         else
         {
             characterController.ForwardInput = 0;
+        }
+
+        if (Input.GetKeyDown("space"))
+        {
+            intr.tryInteract();
         }
     }
 }

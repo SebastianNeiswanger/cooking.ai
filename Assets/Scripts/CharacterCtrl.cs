@@ -9,6 +9,7 @@ public class CharacterCtrl : MonoBehaviour
     public float ForwardInput { get; set; }
     public float DirectionDegrees { get; set; }
     new private Rigidbody rigidbody;
+    private bool allowMovement = true;
 
     private void Awake()
     {
@@ -16,13 +17,25 @@ public class CharacterCtrl : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        // Process Turning
-        transform.rotation = Quaternion.Euler(0, DirectionDegrees, 0);
+        if (allowMovement)
+        {
+            // Process Turning
+            transform.rotation = Quaternion.Euler(0, DirectionDegrees, 0);
 
-        // Reset the velocity
+            // Reset the velocity
+            rigidbody.velocity = Vector3.zero;
+
+            // Apply a forward or backward velocity based on player input
+            rigidbody.velocity += transform.forward * Mathf.Clamp(ForwardInput, -1f, 1f) * moveSpeed;
+        }
+    }
+    public void moveOn()
+    {
+        allowMovement = true;
+    }
+    public void moveOff()
+    {
+        allowMovement = false;
         rigidbody.velocity = Vector3.zero;
-
-        // Apply a forward or backward velocity based on player input
-        rigidbody.velocity += transform.forward * Mathf.Clamp(ForwardInput, -1f, 1f) * moveSpeed;
     }
 }

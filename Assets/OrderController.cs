@@ -56,11 +56,7 @@ public class OrderController : MonoBehaviour
         }
         Order order = new Order(burger);
         openOrders.Add(orderNum, order);
-        if (burger != 0)
-        {
-            order.SetIngredients(burger);
-        }
-
+        
         return orderNum;
     }
 

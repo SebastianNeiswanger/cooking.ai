@@ -98,7 +98,7 @@ public class KitchenSerializer : MonoBehaviour
         }
     }
 
-    void DeserializeKitchen()
+    public void DeserializeKitchen()
     {
         // Destroy any existing children
         foreach (Transform child in transform)

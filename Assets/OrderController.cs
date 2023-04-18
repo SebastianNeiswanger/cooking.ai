@@ -99,6 +99,12 @@ public class OrderController : MonoBehaviour
         }
         return observations;
     }
+
+    public void ResetOrders()
+    {
+        openOrders = new Dictionary<int, Order>();
+        completeOrders = new Dictionary<int, Order>();
+    }
 }
 
 enum ingredient

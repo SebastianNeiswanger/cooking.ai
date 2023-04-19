@@ -15,42 +15,49 @@ public class OrderController : MonoBehaviour
     }
 
     // Returns order number
-    public int CreateNewOrder()
+    public int CreateNewOrder(int burger = 0)
     {
-        System.Random random = new System.Random();
-        // get random ingredients
-        Array values = Enum.GetValues(typeof(ingredient));
-        int numIngredients = random.Next(4); // between 0 and 3 (cheese, lettuce, tomato)
-        // Create list of random ingredients
-        List<ingredient> ingredients = new List<ingredient>();
-        while (ingredients.Count < numIngredients)
+        int orderNum = openOrders.Count + completeOrders.Count;
+        if (burger == 0)
         {
-            switch (random.Next(3))
+            burger += 14;
+            System.Random random = new System.Random();
+            // get random ingredients
+            int numIngredients = random.Next(4); // between 0 and 3 (cheese, lettuce, tomato)
+                                                 // Create list of random ingredients
+            int i = 0;
+            while (i < numIngredients)
             {
-                case 0:
-                    if (!ingredients.Contains(ingredient.cutCheese))
-                    {
-                        ingredients.Add(ingredient.cutCheese);
-                    }
-                    break;
-                case 1:
-                    if (!ingredients.Contains(ingredient.cutLettuce))
-                    {
-                        ingredients.Add(ingredient.cutLettuce);
-                    }
-                    break;
-                case 2:
-                    if (!ingredients.Contains(ingredient.cutTomato))
-                    {
-                        ingredients.Add(ingredient.cutTomato);
-                    }
-                    break;
+                switch (random.Next(3))
+                {
+                    // If burger does not have given ingredient, add it to burger
+                    case 0:
+                        if (((ingredient) burger & ingredient.cutCheese) == 0)
+                        {
+                            burger += (int) ingredient.cutCheese;
+                            ++i;
+                        }
+                        break;
+                    case 1:
+                        if (((ingredient)burger & ingredient.cutLettuce) == 0)
+                        {
+                            burger += (int)ingredient.cutLettuce;
+                            ++i;
+                        }
+                        break;
+                    case 2:
+                        if (((ingredient)burger & ingredient.cutTomato) == 0)
+                        {
+                            burger += (int)ingredient.cutTomato;
+                            ++i;
+                        }
+                        break;
+                }
             }
         }
-
-        int orderNum = openOrders.Count + completeOrders.Count;
-        openOrders.Add(orderNum, new Order(ingredients));
-
+        Order order = new Order(burger);
+        openOrders.Add(orderNum, order);
+        
         return orderNum;
     }
 
@@ -99,38 +106,45 @@ public class OrderController : MonoBehaviour
         }
         return observations;
     }
+
+    public void ResetOrders()
+    {
+        openOrders = new Dictionary<int, Order>();
+        completeOrders = new Dictionary<int, Order>();
+    }
 }
 
 enum ingredient
 {
     // bitfield
-    uncookedBeef = 1,
-    cookedBeef = 2,
-    buns = 4,
-    plate = 8,
-    uncutCheese = 16,
-    cutCheese = 32,
-    uncutTomato = 64,
-    cutTomato = 128,
-    uncutLettuce = 256,
-    cutLettuce = 512
+    nothing = 0b_0000_0000_0000,  // 0
+    uncookedBeef = 0b_0000_0000_0001,  // 1
+    cookedBeef = 0b_0000_0000_0010,  // 2
+    buns = 0b_0000_0000_0100,  // 4
+    plate = 0b_0000_0000_1000,  // 8
+    uncutCheese = 0b_0000_0001_0000,  // 16
+    cutCheese = 0b_0000_0010_0000,  // 32
+    uncutTomato = 0b_0000_0100_0000,  // 64
+    cutTomato = 0b_0000_1000_0000,  // 128
+    uncutLettuce = 0b_0001_0000_0000,  // 256
+    cutLettuce = 0b_0010_0000_0000,  // 512
 }
 class Order
 {
-    private List<ingredient> ingredients;
+    ingredient ingredients;
 
-    public Order(List<ingredient> i)
+    public Order(int i)
     {
-        ingredients = i;        
+        ingredients = (ingredient)i;
     }
 
     public int GetSerializedIngredients()
     {
-        int serialized = 13; // Beef, buns, and plate
-        foreach (ingredient i in ingredients)
-        {
-            serialized += (int)i;
-        }
-        return serialized;
+        return (int)ingredients;
+    }
+
+    public void SetIngredients(int i)
+    {
+        ingredients = (ingredient)i;
     }
 }

@@ -27,6 +27,10 @@ public class KitchenSerializer : MonoBehaviour
         {
             DeserializeKitchen();
         }
+        else
+        {
+            SerializeKitchen(false);
+        }
     }
     private void Update()
     {
@@ -98,7 +102,7 @@ public class KitchenSerializer : MonoBehaviour
         }
     }
 
-    void DeserializeKitchen()
+    public void DeserializeKitchen()
     {
         // Destroy any existing children
         foreach (Transform child in transform)

@@ -9,18 +9,37 @@ public class PlayerAgent : Agent
 {
     CharacterController cc;
     public float moveSpeed;
+    private int rewardGroup;
+    public int defaultRewardGroup;
     public KitchenSerializer kitchen;
     public OrderController oc;
 
     void Start()
     {
         cc = GetComponent<CharacterController>();
+        rewardGroup = (int) Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup);
     }
+
+    // TODO: Set rewards based on rewardGroup.
 
     public override void OnEpisodeBegin()
     {
         // Center the agent
-        transform.position = Vector3.zero;
+        transform.position = new Vector3(2.0f, -0.49f, 2.0f);
+
+        // Set reward group
+        rewardGroup = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup);
+
+        // Get new kitchen (once the single kitchen PoC works)
+            // kitchen.filepath = random kitchen path
+        // Reset kitchen state
+        kitchen.DeserializeKitchen();
+
+        // Reset orders
+        oc.ResetOrders();
+        oc.CreateNewOrder(686); // Full burger
+
+        // TODO: Clear hand
     }
 
     public override void CollectObservations(VectorSensor sensor)

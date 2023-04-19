@@ -12,8 +12,9 @@ public class CuttingTile : Tile
 
     private float cuttingPercent;
 
-    private void Start()
+    protected override void Start()
     {
+        base.Start();
         cuttingPercent = 0f;
     }
 
@@ -32,6 +33,7 @@ public class CuttingTile : Tile
 
     override public int Interact(int hand)
     {
+        int newHand;
         // If the cuttingBoard is empty
         if (state == 0)
         {
@@ -39,12 +41,12 @@ public class CuttingTile : Tile
             if (hasUncut(hand))
             {
                 state = 1;
-                return -1;
+                newHand = -1;
             }
             // Else do nothing
             else
             {
-                return hand;
+                newHand = hand;
             }
         }
         // If the player is cutting, the player continues to cut
@@ -56,8 +58,11 @@ public class CuttingTile : Tile
         else
         {
             state = 0;
-            return hand * 2;
+            newHand = hand * 2;
         }
+
+        kitchen.UpdateTileState(x, z, state);
+        return newHand;
     }
     private bool hasUncut(int burger)
     {

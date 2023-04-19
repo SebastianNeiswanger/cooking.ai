@@ -13,6 +13,7 @@ public class OvenTile : Tile
 
     private void Start()
     {
+        base.Start();
         cookingPercent = 0;
     }
 

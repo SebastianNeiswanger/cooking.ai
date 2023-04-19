@@ -14,6 +14,7 @@ public class CuttingTile : Tile
 
     private void Start()
     {
+        base.Start();
         cuttingPercent = 0f;
     }
 

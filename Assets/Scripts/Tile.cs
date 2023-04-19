@@ -16,7 +16,7 @@ abstract public class Tile : MonoBehaviour
     public int Orientation { get => orientation; set => orientation = value; }
     public int State { get => state; set => state = value; }
 
-    private void Start()
+    protected void Start()
     {
         KitchenSerializer kitchen = transform.parent.GetComponent<KitchenSerializer>();
         // This could be cleaned up. Orientation is based on current rotation

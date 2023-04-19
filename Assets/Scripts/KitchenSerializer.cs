@@ -27,6 +27,10 @@ public class KitchenSerializer : MonoBehaviour
         {
             DeserializeKitchen();
         }
+        else
+        {
+            SerializeKitchen(false);
+        }
     }
     private void Update()
     {

@@ -11,7 +11,7 @@ public class OvenTile : Tile
 
     private float cookingPercent;
 
-    private void Start()
+    protected override void Start()
     {
         base.Start();
         cookingPercent = 0;
@@ -48,7 +48,7 @@ public class OvenTile : Tile
             state = 0;
         }
         // Else if the oven has cookedBeef and the hand does not have unprepared ingredients or cookedBeef, add cookedBeef to hand
-        else if (state == 2 && hasCookedBeeforUnprepared(hand))
+        else if (state == 2 && !hasCookedBeeforUnprepared(hand))
         {
             newHand = 2 + hand;
             state = 0;

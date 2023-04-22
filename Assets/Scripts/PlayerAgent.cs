@@ -85,61 +85,9 @@ public class PlayerAgent : Agent
         // 1: Down and Up (-1, 1)
         // 2: Interact
 
-        int horizontal = actions.DiscreteActions[0] <= 1 ? actions.DiscreteActions[0] : -1;
-        int vertical = actions.DiscreteActions[1] <= 1 ? actions.DiscreteActions[1] : -1;
+        cc.horizontal = actions.DiscreteActions[0] <= 1 ? actions.DiscreteActions[0] : -1;
+        cc.vertical = actions.DiscreteActions[1] <= 1 ? actions.DiscreteActions[1] : -1;
         bool interact = actions.DiscreteActions[2] > 0;
-
-        switch (vertical)
-        {
-            case -1:
-                if (horizontal == -1)
-                {
-                    cc.DirectionDegrees = 225f;
-                    cc.ForwardInput = 1;
-                } else if (horizontal == 0)
-                {
-                    cc.DirectionDegrees = 180f;
-                    cc.ForwardInput = 1;
-                } else
-                {
-                    cc.DirectionDegrees = 135f;
-                    cc.ForwardInput = 1;
-                }
-                break;
-            case 0:
-                if (horizontal == -1)
-                {
-                    cc.DirectionDegrees = 270f;
-                    cc.ForwardInput = 1;
-                }
-                else if (horizontal == 0)
-                {
-                    cc.ForwardInput = 0;
-                }
-                else
-                {
-                    cc.DirectionDegrees = 90f;
-                    cc.ForwardInput = 1;
-                }
-                break;
-            case 1:
-                if (horizontal == -1)
-                {
-                    cc.DirectionDegrees = 315f;
-                    cc.ForwardInput = 1;
-                }
-                else if (horizontal == 0)
-                {
-                    cc.DirectionDegrees = 0f;
-                    cc.ForwardInput = 1;
-                }
-                else
-                {
-                    cc.DirectionDegrees = 45f;
-                    cc.ForwardInput = 1;
-                }
-                break;
-        }
 
         if (interact)
         {

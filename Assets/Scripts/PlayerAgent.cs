@@ -7,8 +7,9 @@ using Unity.MLAgents.Actuators;
 
 public class PlayerAgent : Agent
 {
-    CharacterController cc;
-    public float moveSpeed;
+    CharacterCtrl cc; 
+    public GameObject interactionObj;
+    private Interact intr;
     private int rewardGroup;
     public int defaultRewardGroup;
     public KitchenSerializer kitchen;
@@ -16,7 +17,8 @@ public class PlayerAgent : Agent
 
     void Start()
     {
-        cc = GetComponent<CharacterController>();
+        intr = interactionObj.GetComponent<Interact>();
+        cc = GetComponent<CharacterCtrl>();
         rewardGroup = (int) Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup);
     }
 
@@ -76,17 +78,83 @@ public class PlayerAgent : Agent
         }
     }
 
-    public override void OnActionReceived(ActionBuffers actionBuffers)
+    public override void OnActionReceived(ActionBuffers actions)
     {
-        Vector3 movement = moveSpeed * Vector3.Normalize(new Vector3(actionBuffers.ContinuousActions[0], 0, actionBuffers.ContinuousActions[1]));
-        //Forward/Backward
-        cc.SimpleMove(movement);
+        // actions[]:
+        // 0: Left and Right (-1, 1)
+        // 1: Down and Up (-1, 1)
+        // 2: Interact
+
+        int horizontal = actions.DiscreteActions[0] <= 1 ? actions.DiscreteActions[0] : -1;
+        int vertical = actions.DiscreteActions[1] <= 1 ? actions.DiscreteActions[1] : -1;
+        bool interact = actions.DiscreteActions[2] > 0;
+
+        switch (vertical)
+        {
+            case -1:
+                if (horizontal == -1)
+                {
+                    cc.DirectionDegrees = 225f;
+                    cc.ForwardInput = 1;
+                } else if (horizontal == 0)
+                {
+                    cc.DirectionDegrees = 180f;
+                    cc.ForwardInput = 1;
+                } else
+                {
+                    cc.DirectionDegrees = 135f;
+                    cc.ForwardInput = 1;
+                }
+                break;
+            case 0:
+                if (horizontal == -1)
+                {
+                    cc.DirectionDegrees = 270f;
+                    cc.ForwardInput = 1;
+                }
+                else if (horizontal == 0)
+                {
+                    cc.ForwardInput = 0;
+                }
+                else
+                {
+                    cc.DirectionDegrees = 90f;
+                    cc.ForwardInput = 1;
+                }
+                break;
+            case 1:
+                if (horizontal == -1)
+                {
+                    cc.DirectionDegrees = 315f;
+                    cc.ForwardInput = 1;
+                }
+                else if (horizontal == 0)
+                {
+                    cc.DirectionDegrees = 0f;
+                    cc.ForwardInput = 1;
+                }
+                else
+                {
+                    cc.DirectionDegrees = 45f;
+                    cc.ForwardInput = 1;
+                }
+                break;
+        }
+
+        if (interact)
+        {
+            intr.tryInteract();
+        }
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        var continuousActionsOut = actionsOut.ContinuousActions;
-        continuousActionsOut[0] = Input.GetAxis("Horizontal");
-        continuousActionsOut[1] = Input.GetAxis("Vertical");
+        int vertical = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
+        int horizontal = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+
+        ActionSegment<int> actions = actionsOut.DiscreteActions;
+        actions[0] = horizontal >= 0 ? horizontal : 2;
+        actions[1] = vertical >= 0 ? vertical : 2;
+        actions[2] = Input.GetKeyDown("space") ? 1 : 0;
     }
 }

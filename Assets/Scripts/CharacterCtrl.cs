@@ -12,8 +12,6 @@ public class CharacterCtrl : MonoBehaviour
     private float DirectionDegrees { get; set; }
     new private Rigidbody rigidbody;
     private bool allowMovement = true;
-    private int intv = 0;
-    private int testTimer = 10000;
 
     private void Awake()
     {
@@ -21,15 +19,6 @@ public class CharacterCtrl : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        intv++;
-        if (intv%testTimer == 0)
-        {
-            Debug.Log("Ctrl Update " + intv/testTimer + ":\n" +
-                        "horizontal: " + horizontal + "\n" + 
-                        "vertical: " + vertical + "\n" + 
-                        "forward: " + ForwardInput + "\n" + 
-                        "movement allowed: " + allowMovement);
-        }
         if (!allowMovement) { return; }
         // Process Actions
         ProcessMovement();

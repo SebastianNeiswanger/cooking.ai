@@ -95,10 +95,6 @@ public class PlayerAgent : Agent
         // 1: Down and Up (-1, 1)
         // 2: Interact
 
-        Debug.Log(actions.DiscreteActions[0]);
-        Debug.Log(actions.DiscreteActions[1]);
-        Debug.Log(actions.DiscreteActions[2]);
-
         cc.horizontal = actions.DiscreteActions[0] <= 1 ? actions.DiscreteActions[0] : -1;
         cc.vertical = actions.DiscreteActions[1] <= 1 ? actions.DiscreteActions[1] : -1;
         bool interact = actions.DiscreteActions[2] > 0;

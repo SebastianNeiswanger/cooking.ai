@@ -17,10 +17,10 @@ public class PlayerAgent : Agent
     void Start()
     {
         cc = GetComponent<CharacterController>();
-        rewardGroup = (int) Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup);
+        rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup));
     }
 
-    // TODO: Set rewards based on rewardGroup.
+    // TODO: Set rewards based on rewardGroup - look at config/cooking.yaml for lesson descriptions
 
     public override void OnEpisodeBegin()
     {
@@ -28,16 +28,29 @@ public class PlayerAgent : Agent
         transform.position = new Vector3(2.0f, -0.49f, 2.0f);
 
         // Set reward group
-        rewardGroup = (int)Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup);
+        rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup));
 
-        // Get new kitchen (once the single kitchen PoC works)
+        // Get new kitchen (once the single kitchen Proof of Concept works)
             // kitchen.filepath = random kitchen path
+
         // Reset kitchen state
         kitchen.DeserializeKitchen();
 
         // Reset orders
         oc.ResetOrders();
-        oc.CreateNewOrder(686); // Full burger
+        switch (rewardGroup) {
+            case 5:
+                oc.CreateNewOrder();
+                break;
+            case 6:
+                oc.CreateNewOrder();
+                oc.CreateNewOrder();
+                oc.CreateNewOrder();
+                break;
+            default:
+                oc.CreateNewOrder(686); // Full burger
+                break;
+        }
 
         // TODO: Clear hand
     }

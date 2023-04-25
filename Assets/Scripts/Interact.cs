@@ -13,7 +13,7 @@ public class Interact : MonoBehaviour
     private void Start()
     {
         insideObject = false;
-        hand = 16;
+        hand = 0;
         controller = agent.GetComponent<CharacterCtrl>();
     }
 

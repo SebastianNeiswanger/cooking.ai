@@ -77,13 +77,27 @@ public class PlayerAgent : Agent
             }
         }
     }
+    public override void Heuristic(in ActionBuffers actionsOut)
+    {
+        int vertical = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
+        int horizontal = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+        bool interact = Input.GetKeyDown(KeyCode.Space);
 
+        ActionSegment<int> actions = actionsOut.DiscreteActions;
+        actions[0] = horizontal >= 0 ? horizontal : 2;
+        actions[1] = vertical >= 0 ? vertical : 2;
+        actions[2] = interact ? 1 : 0;
+    }
     public override void OnActionReceived(ActionBuffers actions)
     {
         // actions[]:
         // 0: Left and Right (-1, 1)
         // 1: Down and Up (-1, 1)
         // 2: Interact
+
+        Debug.Log(actions.DiscreteActions[0]);
+        Debug.Log(actions.DiscreteActions[1]);
+        Debug.Log(actions.DiscreteActions[2]);
 
         cc.horizontal = actions.DiscreteActions[0] <= 1 ? actions.DiscreteActions[0] : -1;
         cc.vertical = actions.DiscreteActions[1] <= 1 ? actions.DiscreteActions[1] : -1;
@@ -93,16 +107,5 @@ public class PlayerAgent : Agent
         {
             intr.tryInteract();
         }
-    }
-
-    public override void Heuristic(in ActionBuffers actionsOut)
-    {
-        int vertical = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
-        int horizontal = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-
-        ActionSegment<int> actions = actionsOut.DiscreteActions;
-        actions[0] = horizontal >= 0 ? horizontal : 2;
-        actions[1] = vertical >= 0 ? vertical : 2;
-        actions[2] = Input.GetKeyDown("space") ? 1 : 0;
     }
 }

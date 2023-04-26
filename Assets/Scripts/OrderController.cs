@@ -7,11 +7,14 @@ public class OrderController : MonoBehaviour
 {
     private Dictionary<int, Order> openOrders;
     private Dictionary<int, Order> completeOrders;
+    public GameObject orderBubble;
+    private orderDisplay disp;
 
     void Start()
     {
         openOrders = new Dictionary<int, Order>();
         completeOrders = new Dictionary<int, Order>();
+        disp = orderBubble.GetComponent<orderDisplay>();
     }
 
     // Returns order number
@@ -95,13 +98,20 @@ public class OrderController : MonoBehaviour
         {
             throw new KeyNotFoundException("Order " + orderNum.ToString() + " not found");
         }
+
     }
 
     public List<int> SendOrdersToAgent()
     {
+        int firstOrder = -1;
         List<int> observations = new List<int>();
         foreach ((int index, Order o) in openOrders)
         {
+            if (firstOrder == -1)
+            {
+                firstOrder = o.GetSerializedIngredients();
+                disp.dispOrder(firstOrder);
+            }
             observations.Add(o.GetSerializedIngredients());
         }
         return observations;

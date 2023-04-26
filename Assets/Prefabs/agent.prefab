@@ -594,6 +594,9 @@ GameObject:
   - component: {fileID: 7782750496944945773}
   - component: {fileID: 7782750496944945772}
   - component: {fileID: 7782750496944945775}
+  - component: {fileID: 4538573623965350385}
+  - component: {fileID: 966501576188224831}
+  - component: {fileID: 7653200039231987288}
   m_Layer: 0
   m_Name: agent
   m_TagString: Untagged
@@ -638,7 +641,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -653,10 +656,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.678404
+  m_Radius: 0.9
   m_Height: 4.26648
   m_Direction: 1
-  m_Center: {x: -0.0076602893, y: 1.058414, z: 0.7245329}
+  m_Center: {x: -0.0076602893, y: 1.058414, z: 0.876}
 --- !u!114 &7782750496944945772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -677,12 +680,76 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6971725632859262745}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26f167b7a984ca742bd4e28270886cc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactionObj: {fileID: 7782750497802662789}
+--- !u!114 &4538573623965350385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6971725632859262745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d1c4e0b1822b495aa52bc52839ecb30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BrainParameters:
+    VectorObservationSize: 308
+    NumStackedVectorObservations: 1
+    m_ActionSpec:
+      m_NumContinuousActions: 0
+      BranchSizes: 030000000300000002000000
+    VectorActionSize: 030000000300000002000000
+    VectorActionDescriptions: []
+    VectorActionSpaceType: 0
+    hasUpgradedBrainParametersWithActionSpec: 1
+  m_Model: {fileID: 0}
+  m_InferenceDevice: 0
+  m_BehaviorType: 0
+  m_BehaviorName: cooking
+  TeamId: 0
+  m_UseChildSensors: 1
+  m_UseChildActuators: 1
+  m_ObservableAttributeHandling: 0
+--- !u!114 &966501576188224831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6971725632859262745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a32058fd0e1dde546bd188c2e49828f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  agentParameters:
+    maxStep: 0
+  hasUpgradedFromAgentParameters: 1
+  MaxStep: 10000
+  interactionObj: {fileID: 7782750497802662789}
+  defaultRewardGroup: 0
+  kitchen: {fileID: 0}
+  oc: {fileID: 0}
+--- !u!114 &7653200039231987288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6971725632859262745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a5c9d521e5ef4759a8246a07d52221e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DecisionPeriod: 5
+  TakeActionsBetweenDecisions: 1
 --- !u!1 &7461762937829507116
 GameObject:
   m_ObjectHideFlags: 0

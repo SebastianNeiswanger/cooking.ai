@@ -11,12 +11,15 @@ public class CuttingTile : Tile
     // 3: finished cutting
 
     private float cuttingPercent;
-    private int cuttingObject = 0;
+    private int storedFood;
+    private ProgressBarDisplay progressController;
 
     protected override void Start()
     {
         base.Start();
         cuttingPercent = 0f;
+        progressController = this.GetComponent<ProgressBarDisplay>();
+        storedFood = 0;
     }
 
     private void FixedUpdate()
@@ -29,6 +32,7 @@ public class CuttingTile : Tile
                 state = 2;
                 cuttingPercent = 0f;
             }
+            progressController.updateProgress(cuttingPercent);
         }
     }
 
@@ -44,6 +48,10 @@ public class CuttingTile : Tile
                 state = 1;
                 cuttingObject = hand;
                 newHand = -1;
+                storedFood = hand;
+
+                progressController.showBar();
+                progressController.updateProgress(cuttingPercent);
             }
             // Else do nothing
             else
@@ -60,7 +68,9 @@ public class CuttingTile : Tile
         else
         {
             state = 0;
-            newHand = cuttingObject * 2;
+            newHand = storedFood * 2;
+            storedFood = 0;
+            progressController.hideBar();
         }
 
         kitchen.UpdateTileState(x, z, state);

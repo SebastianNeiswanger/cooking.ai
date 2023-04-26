@@ -11,6 +11,7 @@ public class CuttingTile : Tile
     // 3: finished cutting
 
     private float cuttingPercent;
+    private int cuttingObject = 0;
 
     protected override void Start()
     {
@@ -41,6 +42,7 @@ public class CuttingTile : Tile
             if (hasUncut(hand))
             {
                 state = 1;
+                cuttingObject = hand;
                 newHand = -1;
             }
             // Else do nothing
@@ -58,7 +60,7 @@ public class CuttingTile : Tile
         else
         {
             state = 0;
-            newHand = hand * 2;
+            newHand = cuttingObject * 2;
         }
 
         kitchen.UpdateTileState(x, z, state);

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Interact : MonoBehaviour
     public GameObject agent;
     public BurgerDisplay burgerDisplay;
     private CharacterCtrl controller;
+    private string[] interactableTags = { "Beef", "Buns", "Cheese", "Counter", "CuttingBoard", "Lettuce", "Oven", "Plates", "Table", "Tomatoes" };
 
     private void Start()
     {
@@ -30,6 +32,7 @@ public class Interact : MonoBehaviour
     // Trigger functions
     private void OnTriggerEnter(Collider other)
     {
+        if (!Array.Exists(interactableTags, elm => other.CompareTag(elm))) { return; }
         insideObject = true;
         currentTile = other;
     }
@@ -44,7 +47,6 @@ public class Interact : MonoBehaviour
     {
         insideObject = false;
         currentTile = null;
-        Debug.Log("Left " + other);
     }
 
     // Helper function that runs interact and 
@@ -52,14 +54,14 @@ public class Interact : MonoBehaviour
     {
         if (tile == null) { return; }
         int returnedHand = tile.GetComponent<Tile>().Interact(hand);
-        Debug.Log(returnedHand + " from " + tile);
         hand = returnedHand;
-        burgerDisplay.DisplayBurger(returnedHand);
         if (hand == -1)
         {
+            burgerDisplay.DisplayBurger(0);
             controller.moveOff();
         } else
         {
+            burgerDisplay.DisplayBurger(returnedHand);
             controller.moveOn();
         }
     }

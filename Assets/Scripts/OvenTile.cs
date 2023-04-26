@@ -10,11 +10,13 @@ public class OvenTile : Tile
     // 2: cooked
 
     private float cookingPercent;
+    private ProgressBarDisplay progressController;
 
     protected override void Start()
     {
         base.Start();
         cookingPercent = 0;
+        progressController = this.GetComponent<ProgressBarDisplay>();
     }
 
     private void FixedUpdate()
@@ -22,11 +24,15 @@ public class OvenTile : Tile
         if (state == 1)
         {
             // cooking speed
-            cookingPercent += 0.8f;
+            cookingPercent += 0.3f;
             if (cookingPercent >= 100f)
             {
                 state = 2;
                 cookingPercent = 0;
+            }
+            else
+            {
+                progressController.updateProgress(cookingPercent);
             }
         }
     }
@@ -39,6 +45,9 @@ public class OvenTile : Tile
         {
             newHand = 0;
             state = 1;
+
+            progressController.showBar();
+            progressController.updateProgress(cookingPercent);
         }
         // Else if the oven has uncookedBeef and the hand is empty, puts the oven's beef in hand
         else if (state == 1 && hand == 0)
@@ -46,12 +55,14 @@ public class OvenTile : Tile
             newHand = 1;
             cookingPercent = 0f;
             state = 0;
+            progressController.hideBar();
         }
         // Else if the oven has cookedBeef and the hand does not have unprepared ingredients or cookedBeef, add cookedBeef to hand
         else if (state == 2 && !hasCookedBeeforUnprepared(hand))
         {
             newHand = 2 + hand;
             state = 0;
+            progressController.hideBar();
         }
         // Else do nothing
         else

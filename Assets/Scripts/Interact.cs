@@ -11,13 +11,30 @@ public class Interact : MonoBehaviour
     public GameObject agent;
     public BurgerDisplay burgerDisplay;
     private CharacterCtrl controller;
+
+    private float timer;
+    private bool timerOn = false;
+    public float timeBetweenInteracts = 50f;
+
     private string[] interactableTags = { "Beef", "Buns", "Cheese", "Counter", "CuttingBoard", "Lettuce", "Oven", "Plates", "Table", "Tomatoes" };
 
     private void Start()
     {
         insideObject = false;
         hand = 0;
+        timer = 0f;
         controller = agent.GetComponent<CharacterCtrl>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!timerOn) { return; }
+        timer += 1f;
+        if (timer >= timeBetweenInteracts)
+        {
+            timer = 0f;
+            timerOn = false;
+        }
     }
 
     // Run interact by input
@@ -40,7 +57,7 @@ public class Interact : MonoBehaviour
     {
         if (hand == -1)
         {
-            helper(other);
+            helper(currentTile);
         }
     }
     private void OnTriggerExit(Collider other)
@@ -52,8 +69,10 @@ public class Interact : MonoBehaviour
     // Helper function that runs interact and 
     private void helper(Collider tile)
     {
-        if (tile == null) { return; }
+        if ((tile == null || timerOn) && hand != -1) { return; }
+        timerOn = true;
         int returnedHand = tile.GetComponent<Tile>().Interact(hand);
+        Debug.Log(returnedHand);
         hand = returnedHand;
         if (hand == -1)
         {

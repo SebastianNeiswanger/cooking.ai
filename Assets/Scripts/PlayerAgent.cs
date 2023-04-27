@@ -239,7 +239,7 @@ public class PlayerAgent : Agent
     {
         int vertical = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
         int horizontal = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
-        bool interact = Input.GetKeyDown(KeyCode.Space);
+        bool interact = Input.GetKey(KeyCode.Space);
 
         ActionSegment<int> actions = actionsOut.DiscreteActions;
         actions[0] = horizontal >= 0 ? horizontal : 2;

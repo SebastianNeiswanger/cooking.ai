@@ -46,7 +46,6 @@ public class CuttingTile : Tile
             if (hasUncut(hand))
             {
                 state = 1;
-                cuttingObject = hand;
                 newHand = -1;
                 storedFood = hand;
 

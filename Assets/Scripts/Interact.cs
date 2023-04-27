@@ -72,7 +72,6 @@ public class Interact : MonoBehaviour
         if ((tile == null || timerOn) && hand != -1) { return; }
         timerOn = true;
         int returnedHand = tile.GetComponent<Tile>().Interact(hand);
-        Debug.Log(returnedHand);
         hand = returnedHand;
         if (hand == -1)
         {

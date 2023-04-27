@@ -43,6 +43,9 @@ public class Interact : MonoBehaviour
     public void resetHand()
     {
         hand = 0;
+        timer = 0f;
+        timerOn = false;
+        controller.moveOn();
     }
 
     public int getHand()
@@ -82,7 +85,7 @@ public class Interact : MonoBehaviour
     // Helper function that runs interact and 
     private void helper(Collider tile)
     {
-        if ((tile == null || timerOn) && hand != -1) { return; }
+        if ((tile == null || tile.GetComponent<Tile>() == null || timerOn) && hand != -1) { return; }
         int prevHand = hand;
         int prevState = tile.GetComponent<Tile>().State;
         timerOn = true;

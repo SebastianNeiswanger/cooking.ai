@@ -32,6 +32,7 @@ public class PlayerAgent : Agent
     private float nonVarietyReward; // 13
     private float basicBurgerReward; // 14
     private float fullBurgerReward; // 15
+    private float returnReward; // 16
 
     void Start()
     {
@@ -91,6 +92,9 @@ public class PlayerAgent : Agent
             case 15:
                 AddReward(fullBurgerReward);
                 break;
+            case 16:
+                AddReward(returnReward);
+                break;
             default: // including 0
                 break; 
         }
@@ -118,6 +122,7 @@ public class PlayerAgent : Agent
                 nonVarietyReward = 0f;
                 basicBurgerReward = 100f;
                 fullBurgerReward = 100f;
+                returnReward = -1.5f;
                 break;
             case 1: // put beef in the oven
                 movementReward = 0.009f;
@@ -135,6 +140,7 @@ public class PlayerAgent : Agent
                 nonVarietyReward = -0.06f;
                 basicBurgerReward = 100f;
                 fullBurgerReward = 100f;
+                returnReward = -1.0f;
                 break;
             case 2: // grab plate buns and cooked burger
                 movementReward = 0.0045f;
@@ -152,6 +158,7 @@ public class PlayerAgent : Agent
                 nonVarietyReward = -0.06f;
                 basicBurgerReward = 5f;
                 fullBurgerReward = 100f;
+                returnReward = -0.5f;
                 break;
             case 3: // Add all ingredients to the burger
                 movementReward = 0.0045f;
@@ -169,6 +176,7 @@ public class PlayerAgent : Agent
                 nonVarietyReward = -0.03f;
                 basicBurgerReward = 0.1f;
                 fullBurgerReward = 5f;
+                returnReward = -0.4f;
                 break;
             case 4: // serve finished burger to customer
                 movementReward = 0.004f;
@@ -186,6 +194,7 @@ public class PlayerAgent : Agent
                 nonVarietyReward = -0.03f;
                 basicBurgerReward = 0.1f;
                 fullBurgerReward = 1f;
+                returnReward = -0.4f;
                 break;
             case 5: // give a customer a burger based on their order
                 movementReward = 0.004f;
@@ -203,6 +212,7 @@ public class PlayerAgent : Agent
                 nonVarietyReward = -0.03f;
                 basicBurgerReward = 0.3f;
                 fullBurgerReward = 0.0f;
+                returnReward = -0.3f;
                 break;
             case 6: // multiple orders
                 movementReward = 0.003f;
@@ -220,6 +230,7 @@ public class PlayerAgent : Agent
                 nonVarietyReward = -0.07f;
                 basicBurgerReward = 0.4f;
                 fullBurgerReward = 0.0f;
+                returnReward = -0.3f;
                 break;
         }
     }

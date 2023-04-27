@@ -18,6 +18,8 @@ public class Interact : MonoBehaviour
 
     private string[] interactableTags = { "Beef", "Buns", "Cheese", "Counter", "CuttingBoard", "Lettuce", "Oven", "Plates", "Table", "Tomatoes" };
 
+    private string lastTag = "";
+
     private void Start()
     {
         insideObject = false;
@@ -71,6 +73,7 @@ public class Interact : MonoBehaviour
     {
         if ((tile == null || timerOn) && hand != -1) { return; }
         int prevHand = hand;
+        int prevState = tile.GetComponent<Tile>().State;
         timerOn = true;
         int returnedHand = tile.GetComponent<Tile>().Interact(hand);
         hand = returnedHand;
@@ -86,7 +89,7 @@ public class Interact : MonoBehaviour
 
         // Reward agent for interractions
         PlayerAgent pa = agent.GetComponent<PlayerAgent>();
-        String currTag = tile.tag;
+        string currTag = tile.tag;
         int tileState = tile.GetComponent<Tile>().State;
         if (currTag == "Buns" && hand == 4 && prevHand != 4) // get bread
         {
@@ -116,27 +119,37 @@ public class Interact : MonoBehaviour
         {
             pa.grantReward(8);
         }
-        if (false)
+        if (currTag == "Counter" && prevHand != 0 && prevHand != hand) // put things down
         {
             pa.grantReward(12);
         }
-        if (false)
+        if (currTag == "Counter" && lastTag == "Counter") // prevent cheesing the put things down reward
         {
             pa.grantReward(13);
         }
-        if (false)
-        {
+        if ((hand % 4 >= 2 && hand % 8 >= 4 && hand % 16 >= 8) && // has buns, plate, and burger
+            (hand != prevHand) && // something changed
+            (currTag == "Oven" || currTag == "Buns" || currTag == "Plates" || // allow building from source
+             (currTag == "Counter" && hand != prevState))) // allow building from counter without cheesability
+        { 
             pa.grantReward(14);
         }
-        if (false)
+        if (hand == 686 &&
+            (currTag == "Oven" || currTag == "Buns" || currTag == "Plates" || currTag == "CuttingBoard" || // allow building from source
+             (currTag == "Counter" && hand != prevState))) // allow building from counter without cheesability
         {
             pa.grantReward(15);
         }
+        if (hand == 0 && 
+            (currTag == "Buns" || currTag == "Chesse" || currTag == "Lettuce" || currTag == "Beef" || currTag == "Tomatoes" || currTag == "Plates")) // returning materials
+        {
+            pa.grantReward(16);
+        }
 
 
 
 
 
-
+        lastTag = currTag;
     }
 }

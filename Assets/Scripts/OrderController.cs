@@ -112,6 +112,18 @@ public class OrderController : MonoBehaviour
         openOrders = new Dictionary<int, Order>();
         completeOrders = new Dictionary<int, Order>();
     }
+
+    public bool OrderContains(int burger)
+    {
+        foreach ((int index, Order order) in openOrders)
+        {
+            if ((burger & order.GetSerializedIngredients()) == burger)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 enum ingredient

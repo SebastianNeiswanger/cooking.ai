@@ -136,7 +136,10 @@ public class Interact : MonoBehaviour
              (currTag == "Cheese" && hand == 16)) &&
              prevHand == 0) // get materials for burger
         {
-            pa.grantReward(7);
+            if (oc.OrderContains(hand))
+            {
+                pa.grantReward(7);
+            }
         }
         if ((currTag == "Oven" && prevHand == 1 && hand == 0) || 
             (currTag == "CuttingBoard" && prevHand != -1 && hand == -1)) // begin task

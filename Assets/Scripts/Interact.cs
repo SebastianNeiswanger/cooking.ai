@@ -37,6 +37,16 @@ public class Interact : MonoBehaviour
         }
     }
 
+    public void resetHand()
+    {
+        hand = 0;
+    }
+
+    public int getHand()
+    {
+        return hand;
+    }
+
     // Run interact by input
     public void tryInteract()
     {

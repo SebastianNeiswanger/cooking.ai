@@ -10,6 +10,7 @@ public class Interact : MonoBehaviour
     private int hand;
     public GameObject agent;
     public BurgerDisplay burgerDisplay;
+    public OrderController oc;
     private CharacterCtrl controller;
 
     private float timer;
@@ -71,6 +72,29 @@ public class Interact : MonoBehaviour
     {
         if ((tile == null || timerOn) && hand != -1) { return; }
         timerOn = true;
+
+        // Order complete, determine if it was correct and reward the agent respectively
+        if (tile.CompareTag("Table"))
+        {
+            // Burger fulfilled an order
+            if (oc.CompleteOrder(hand))
+            {
+                // Reward agent
+                agent.GetComponent<PlayerAgent>().grantReward(10);
+
+                // TODO: add confetti or sfx
+
+            }
+            // Burger did not fulfil an order
+            else
+            {
+                // Punish agent
+                agent.GetComponent<PlayerAgent>().grantReward(11);
+
+            }
+        }
+
+
         int returnedHand = tile.GetComponent<Tile>().Interact(hand);
         hand = returnedHand;
         if (hand == -1)

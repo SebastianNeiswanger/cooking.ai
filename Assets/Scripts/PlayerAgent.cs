@@ -38,7 +38,7 @@ public class PlayerAgent : Agent
     {
         intr = interactionObj.GetComponent<Interact>();
         cc = GetComponent<CharacterCtrl>();
-        rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup));
+        rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("lessonNum", defaultRewardGroup));
         setRewards(rewardGroup);
         SetReward(0f);
     }
@@ -241,7 +241,8 @@ public class PlayerAgent : Agent
         transform.position = new Vector3(2.0f, -0.49f, 2.0f);
 
         // Set reward group
-        rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup));
+        rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("lessonNum", defaultRewardGroup));
+        Debug.Log("Lesson " + rewardGroup);
 
         // Get new kitchen (once the single kitchen Proof of Concept works)
             // kitchen.filepath = random kitchen path
@@ -265,7 +266,7 @@ public class PlayerAgent : Agent
                 break;
         }
 
-        // TODO: Clear hand
+        intr.resetHand();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -275,8 +276,8 @@ public class PlayerAgent : Agent
         sensor.AddObservation(transform.localPosition.z);
 
 
-        // TODO: Agent burger (what is he holding)
-        sensor.AddObservation(0);
+        // Agent burger (what is he holding)
+        sensor.AddObservation(intr.getHand());
 
 
         // Tiles and burgers

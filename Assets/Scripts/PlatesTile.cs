@@ -8,8 +8,8 @@ public class PlatesTile : Tile
     override public int Interact(int hand)
     {
         // int newHand;
-        // If the hand is has no unprepared ingredients, puts plate in hand
-        if (!hasUnprepared(hand))
+        // If the hand is has no unprepared ingredients or plate, puts plate in hand
+        if (!hasUnpreparedOrPlate(hand))
         {
             return hand + 8;
             // newHand = hand + 8;
@@ -31,8 +31,8 @@ public class PlatesTile : Tile
         // kitchen.UpdateTileState(x, z, state);
         // return newHand;
     }
-    private bool hasUnprepared(int burger)
+    private bool hasUnpreparedOrPlate(int burger)
     {
-        return (burger & (1 + 16 + 64 + 256)) != 0;
+        return (burger & (1 + 8 + 16 + 64 + 256)) != 0;
     }
 }

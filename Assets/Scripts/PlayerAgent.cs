@@ -339,4 +339,9 @@ public class PlayerAgent : Agent
         grantReward(2);
 
     }
+
+    public int getLessonNum()
+    {
+        return rewardGroup;
+    }
 }

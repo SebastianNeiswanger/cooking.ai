@@ -126,6 +126,10 @@ public class Interact : MonoBehaviour
         if (currTag == "Beef" && hand == 1 && prevHand == 0) // get uncooked beef
         {
             pa.grantReward(5);
+            if (pa.getLessonNum() == 0)
+            {
+                pa.EndEpisode();
+            }
         }
         if (currTag == "Oven" && hand % 4 >= 2 && prevHand != 2) // get cooked beef
         {
@@ -141,8 +145,15 @@ public class Interact : MonoBehaviour
                 pa.grantReward(7);
             }
         }
-        if ((currTag == "Oven" && prevHand == 1 && hand == 0) || 
-            (currTag == "CuttingBoard" && prevHand != -1 && hand == -1)) // begin task
+        if (currTag == "Oven" && prevHand == 1 && hand == 0) // begin task
+        {
+            pa.grantReward(8);
+            if (pa.getLessonNum() == 1)
+            {
+                pa.EndEpisode();
+            }
+        }
+        if (currTag == "CuttingBoard" && prevHand != -1 && hand == -1) // begin task
         {
             pa.grantReward(8);
         }
@@ -160,23 +171,30 @@ public class Interact : MonoBehaviour
              (currTag == "Counter" && hand != prevState))) // allow building from counter without cheesability
         { 
             pa.grantReward(14);
+            if (pa.getLessonNum() == 2)
+            {
+                pa.EndEpisode();
+            }
         }
         if (hand == 686 &&
             (currTag == "Oven" || currTag == "Buns" || currTag == "Plates" || currTag == "CuttingBoard" || // allow building from source
              (currTag == "Counter" && hand != prevState))) // allow building from counter without cheesability
         {
             pa.grantReward(15);
+            if (pa.getLessonNum() == 3)
+            {
+                pa.EndEpisode();
+            }
         }
         if (hand == 0 && 
             (currTag == "Buns" || currTag == "Chesse" || currTag == "Lettuce" || currTag == "Beef" || currTag == "Tomatoes" || currTag == "Plates")) // returning materials
         {
             pa.grantReward(16);
         }
-
-
-
-
-
         lastTag = currTag;
+
+        // end episode
+
+
     }
 }

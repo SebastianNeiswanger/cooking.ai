@@ -124,6 +124,11 @@ public class OrderController : MonoBehaviour
         }
         return false;
     }
+
+    public bool OrdersDone()
+    {
+        return (openOrders.Values.Count == 0);
+    }
 }
 
 enum ingredient

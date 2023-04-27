@@ -56,7 +56,7 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 1000
           threshold: 1.8
-        value: 3.0
+        value: 2.0
       - name: TheFullSpiel # Add all chopped ingredients to burger
         completion_criteria:
           measure: reward
@@ -64,7 +64,7 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 5000
           threshold: 1.8
-        value: 4.0
+        value: 3.0
       - name: OrderUp # Serve finished burger to customer
         completion_criteria:
           measure: reward
@@ -72,7 +72,7 @@ environment_parameters:
           signal_smoothing: true
           min_lesson_length: 500
           threshold: 1.8
-        value: 5.0
+        value: 4.0
       - name: PickyEaters # Give customer burger based on order (orders should change here)
         completion_criteria:
           measure: reward

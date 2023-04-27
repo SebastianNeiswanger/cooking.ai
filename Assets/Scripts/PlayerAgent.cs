@@ -242,6 +242,7 @@ public class PlayerAgent : Agent
 
         // Set reward group
         rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("lessonNum", defaultRewardGroup));
+        Debug.Log("Lesson " + rewardGroup);
 
         // Get new kitchen (once the single kitchen Proof of Concept works)
             // kitchen.filepath = random kitchen path

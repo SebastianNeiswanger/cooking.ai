@@ -94,7 +94,23 @@ public class Interact : MonoBehaviour
             if (oc.CompleteOrder(hand))
             {
                 // Reward agent
+                PlayerAgent pa = agent.GetComponent<PlayerAgent>();
                 agent.GetComponent<PlayerAgent>().grantReward(10);
+                int ln = pa.getLessonNum();
+                if (ln >= 4)
+                {
+                    if (ln == 6)
+                    {
+                        if (oc.OrdersDone())
+                        {
+                            pa.EndEpisode();
+                        }
+                    }
+                    else
+                    {
+                        pa.EndEpisode();
+                    }
+                }
 
                 // TODO: add confetti or sfx
 

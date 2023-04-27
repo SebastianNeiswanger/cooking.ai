@@ -62,5 +62,9 @@ public class Interact : MonoBehaviour
         {
             controller.moveOn();
         }
+
+        // Reward agent for interractions
+
+
     }
 }

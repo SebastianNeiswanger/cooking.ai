@@ -16,29 +16,84 @@ public class PlayerAgent : Agent
     public OrderController oc;
 
     // learning rewards
-    private float movementReward;
-    private float survivalReward;
-    private float getBreadReward;
-    private float getPlateReward;
-    private float getBeefReward;
-    private float getCookedBeefReward;
-    private float getMatReward;
-    private float startTaskReward;
-    private float finishTaskReward;
-    private float correctDeliveryReward;
-    private float incorrectDeliveryReward;
-    private float placementReward;
-    private float nonVarietyReward;
-    private float basicBurgerReward;
-    private float fullBurgerReward;
+    // 0 is no reward
+    private float movementReward; // 1
+    private float survivalReward; // 2
+    private float getBreadReward; // 3
+    private float getPlateReward; // 4
+    private float getBeefReward; // 5
+    private float getCookedBeefReward; // 6
+    private float getMatReward; // 7
+    private float startTaskReward; // 8
+    private float finishTaskReward; // 9
+    private float correctDeliveryReward; // 10
+    private float incorrectDeliveryReward; // 11
+    private float placementReward; // 12
+    private float nonVarietyReward; // 13
+    private float basicBurgerReward; // 14
+    private float fullBurgerReward; // 15
 
     void Start()
     {
-        cc = GetComponent<CharacterController>();
+        cc = GetComponent<CharacterCtrl>();
         rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("rewardGroup", defaultRewardGroup));
         setRewards(rewardGroup);
+        SetReward(0f);
     }
 
+    public void grantReward(int ind)
+    {
+        switch(ind)
+        {
+            case 1:
+                AddReward(movementReward);
+                break;
+            case 2:
+                AddReward(survivalReward);
+                break;
+            case 3:
+                AddReward(getBreadReward);
+                break;
+            case 4:
+                AddReward(getPlateReward);
+                break;
+            case 5:
+                AddReward(getBeefReward);
+                break;
+            case 6:
+                AddReward(getCookedBeefReward);
+                break;
+            case 7:
+                AddReward(getMatReward);
+                break;
+            case 8:
+                AddReward(startTaskReward);
+                break;
+            case 9:
+                AddReward(finishTaskReward);
+                break;
+            case 10:
+                AddReward(correctDeliveryReward);
+                break;
+            case 11:
+                AddReward(incorrectDeliveryReward);
+                break;
+            case 12:
+                AddReward(placementReward);
+                break;
+            case 13:
+                AddReward(nonVarietyReward);
+                break;
+            case 14:
+                AddReward(basicBurgerReward);
+                break;
+            case 15:
+                AddReward(fullBurgerReward);
+                break;
+            default: // including 0
+                break; 
+        }
+    }
     // TODO: Set rewards based on rewardGroup - look at config/cooking.yaml for lesson descriptions
     // gonna be hardcoded because time is of the essence
 

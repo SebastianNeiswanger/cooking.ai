@@ -290,7 +290,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7749387823538476451, guid: 97bda3b18409c09459863d423a49a5de, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.4899998
+      value: 0.026
       objectReference: {fileID: 0}
     - target: {fileID: 7749387823538476451, guid: 97bda3b18409c09459863d423a49a5de, type: 3}
       propertyPath: m_LocalPosition.z
@@ -669,7 +669,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6de2b700aad1b8942b3227ecdd53352a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.47
+      value: -0.014
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6de2b700aad1b8942b3227ecdd53352a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -747,7 +747,7 @@ MonoBehaviour:
   Beef: {fileID: 4936932843875185182, guid: 3bdc0108537b515428289dcab9585b3f, type: 3}
   Buns: {fileID: 6381124192483117646, guid: 20e17a2beab90de42bebd36757d76e72, type: 3}
   Cheese: {fileID: 6271098041543519414, guid: 7928300f71fad2c48ac194e5ea205725, type: 3}
-  Counter: {fileID: 6703228086018115773, guid: b82f6b7d9779ce14894d59e8252a7c35, type: 3}
+  Counter: {fileID: 7304829755486466268, guid: 65d3c9acbc56d564d89e40f2c20ff840, type: 3}
   CuttingBoard: {fileID: 1032526914447585028, guid: 73b6e2848c3cdcf40b26191bb4a3f659, type: 3}
   Lettuce: {fileID: 4781086885043201256, guid: 9b418a4fc3e50d1408703ab912767c5f, type: 3}
   Oven: {fileID: 6544169149422733012, guid: 8bf84b643ed307e41ae2524ab8d9a5ed, type: 3}

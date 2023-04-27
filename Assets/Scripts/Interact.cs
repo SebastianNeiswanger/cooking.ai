@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,11 +12,29 @@ public class Interact : MonoBehaviour
     public BurgerDisplay burgerDisplay;
     private CharacterCtrl controller;
 
+    private float timer;
+    private bool timerOn = false;
+    public float timeBetweenInteracts = 50f;
+
+    private string[] interactableTags = { "Beef", "Buns", "Cheese", "Counter", "CuttingBoard", "Lettuce", "Oven", "Plates", "Table", "Tomatoes" };
+
     private void Start()
     {
         insideObject = false;
         hand = 0;
+        timer = 0f;
         controller = agent.GetComponent<CharacterCtrl>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (!timerOn) { return; }
+        timer += 1f;
+        if (timer >= timeBetweenInteracts)
+        {
+            timer = 0f;
+            timerOn = false;
+        }
     }
 
     // Run interact by input
@@ -30,6 +49,7 @@ public class Interact : MonoBehaviour
     // Trigger functions
     private void OnTriggerEnter(Collider other)
     {
+        if (!Array.Exists(interactableTags, elm => other.CompareTag(elm))) { return; }
         insideObject = true;
         currentTile = other;
     }
@@ -37,29 +57,29 @@ public class Interact : MonoBehaviour
     {
         if (hand == -1)
         {
-            helper(other);
+            helper(currentTile);
         }
     }
     private void OnTriggerExit(Collider other)
     {
         insideObject = false;
         currentTile = null;
-        Debug.Log("Left " + other);
     }
 
     // Helper function that runs interact and 
     private void helper(Collider tile)
     {
-        if (tile == null) { return; }
+        if ((tile == null || timerOn) && hand != -1) { return; }
+        timerOn = true;
         int returnedHand = tile.GetComponent<Tile>().Interact(hand);
-        Debug.Log(returnedHand + " from " + tile);
         hand = returnedHand;
-        burgerDisplay.DisplayBurger(returnedHand);
         if (hand == -1)
         {
+            burgerDisplay.DisplayBurger(0);
             controller.moveOff();
         } else
         {
+            burgerDisplay.DisplayBurger(returnedHand);
             controller.moveOn();
         }
 

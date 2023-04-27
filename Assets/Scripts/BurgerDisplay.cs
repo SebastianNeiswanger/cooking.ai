@@ -53,6 +53,10 @@ public class BurgerDisplay : MonoBehaviour
 
     public void DisplayBurger(int burger)
     {
+        if (burger < 0)
+        {
+            burger = 0;
+        }
         // for each ingredient, if it's in the burger, activate it. Otherwise, deactivate it
         uncookedBurger.SetActive((((ingredient)burger & ingredient.uncookedBeef) != 0));
         cookedBurger.SetActive((((ingredient)burger & ingredient.cookedBeef) != 0));

@@ -7,8 +7,9 @@ using Unity.MLAgents.Actuators;
 
 public class PlayerAgent : Agent
 {
-    CharacterController cc;
-    public float moveSpeed;
+    CharacterCtrl cc; 
+    public GameObject interactionObj;
+    private Interact intr;
     private int rewardGroup;
     public int defaultRewardGroup;
     public KitchenSerializer kitchen;
@@ -233,18 +234,31 @@ public class PlayerAgent : Agent
             }
         }
     }
-
-    public override void OnActionReceived(ActionBuffers actionBuffers)
-    {
-        Vector3 movement = moveSpeed * Vector3.Normalize(new Vector3(actionBuffers.ContinuousActions[0], 0, actionBuffers.ContinuousActions[1]));
-        //Forward/Backward
-        cc.SimpleMove(movement);
-    }
-
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        var continuousActionsOut = actionsOut.ContinuousActions;
-        continuousActionsOut[0] = Input.GetAxis("Horizontal");
-        continuousActionsOut[1] = Input.GetAxis("Vertical");
+        int vertical = Mathf.RoundToInt(Input.GetAxisRaw("Vertical"));
+        int horizontal = Mathf.RoundToInt(Input.GetAxisRaw("Horizontal"));
+        bool interact = Input.GetKeyDown(KeyCode.Space);
+
+        ActionSegment<int> actions = actionsOut.DiscreteActions;
+        actions[0] = horizontal >= 0 ? horizontal : 2;
+        actions[1] = vertical >= 0 ? vertical : 2;
+        actions[2] = interact ? 1 : 0;
+    }
+    public override void OnActionReceived(ActionBuffers actions)
+    {
+        // actions[]:
+        // 0: Left and Right (-1, 1)
+        // 1: Down and Up (-1, 1)
+        // 2: Interact
+
+        cc.horizontal = actions.DiscreteActions[0] <= 1 ? actions.DiscreteActions[0] : -1;
+        cc.vertical = actions.DiscreteActions[1] <= 1 ? actions.DiscreteActions[1] : -1;
+        bool interact = actions.DiscreteActions[2] > 0;
+
+        if (interact)
+        {
+            intr.tryInteract();
+        }
     }
 }

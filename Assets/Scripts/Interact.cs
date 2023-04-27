@@ -86,6 +86,7 @@ public class Interact : MonoBehaviour
         int prevHand = hand;
         int prevState = tile.GetComponent<Tile>().State;
         timerOn = true;
+        PlayerAgent pa = agent.GetComponent<PlayerAgent>();
 
         // Order complete, determine if it was correct and reward the agent respectively
         if (tile.CompareTag("Table"))
@@ -94,8 +95,7 @@ public class Interact : MonoBehaviour
             if (oc.CompleteOrder(hand))
             {
                 // Reward agent
-                PlayerAgent pa = agent.GetComponent<PlayerAgent>();
-                agent.GetComponent<PlayerAgent>().grantReward(10);
+                pa.grantReward(10);
                 int ln = pa.getLessonNum();
                 if (ln >= 4)
                 {
@@ -119,7 +119,7 @@ public class Interact : MonoBehaviour
             else
             {
                 // Punish agent
-                agent.GetComponent<PlayerAgent>().grantReward(11);
+                pa.grantReward(11);
 
             }
         }
@@ -138,7 +138,6 @@ public class Interact : MonoBehaviour
         }
 
         // Reward agent for interractions
-        PlayerAgent pa = agent.GetComponent<PlayerAgent>();
         string currTag = tile.tag;
         int tileState = tile.GetComponent<Tile>().State;
         if (currTag == "Buns" && hand == 4 && prevHand != 4) // get bread

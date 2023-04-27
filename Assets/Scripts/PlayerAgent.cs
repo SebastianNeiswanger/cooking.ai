@@ -25,7 +25,7 @@ public class PlayerAgent : Agent
     private float getCookedBeefReward; // 6
     private float getMatReward; // 7
     private float startTaskReward; // 8
-    private float finishTaskReward; // 9
+    private float finishTaskReward; // 9 IRRELEVANT, WONT BE USED
     private float correctDeliveryReward; // 10
     private float incorrectDeliveryReward; // 11
     private float placementReward; // 12
@@ -127,7 +127,7 @@ public class PlayerAgent : Agent
                 getBeefReward = 1.0f;
                 getCookedBeefReward = 1.5f;
                 getMatReward = 0.02f;
-                startTaskReward = 0.5f;
+                startTaskReward = 0.8f;
                 finishTaskReward = 0.5f;
                 correctDeliveryReward = 100f;
                 incorrectDeliveryReward = 0.0f;
@@ -144,7 +144,7 @@ public class PlayerAgent : Agent
                 getBeefReward = 0.5f;
                 getCookedBeefReward = 0.8f;
                 getMatReward = 0.02f;
-                startTaskReward = 0.2f;
+                startTaskReward = 0.4f;
                 finishTaskReward = 0.2f;
                 correctDeliveryReward = 100f;
                 incorrectDeliveryReward = 0.0f;
@@ -161,7 +161,7 @@ public class PlayerAgent : Agent
                 getBeefReward = 0.2f;
                 getCookedBeefReward = 0.6f;
                 getMatReward = 0.1f;
-                startTaskReward = 0.15f;
+                startTaskReward = 0.3f;
                 finishTaskReward = 0.15f;
                 correctDeliveryReward = 100f;
                 incorrectDeliveryReward = 0.001f;
@@ -178,7 +178,7 @@ public class PlayerAgent : Agent
                 getBeefReward = 0.15f;
                 getCookedBeefReward = 0.2f;
                 getMatReward = 0.1f;
-                startTaskReward = 0.15f;
+                startTaskReward = 0.3f;
                 finishTaskReward = 0.15f;
                 correctDeliveryReward = 5f;
                 incorrectDeliveryReward = 0.3f;
@@ -195,7 +195,7 @@ public class PlayerAgent : Agent
                 getBeefReward = 0.05f;
                 getCookedBeefReward = 0.05f;
                 getMatReward = 0.3f;
-                startTaskReward = 0.1f;
+                startTaskReward = 0.2f;
                 finishTaskReward = 0.1f;
                 correctDeliveryReward = 7f;
                 incorrectDeliveryReward = 0.01f;
@@ -212,7 +212,7 @@ public class PlayerAgent : Agent
                 getBeefReward = 0.05f;
                 getCookedBeefReward = 0.05f;
                 getMatReward = 0.3f;
-                startTaskReward = 0.3f;
+                startTaskReward = 0.5f;
                 finishTaskReward = 0.3f;
                 correctDeliveryReward = 1.5f;
                 incorrectDeliveryReward = 0.01f;

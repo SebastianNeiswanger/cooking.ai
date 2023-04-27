@@ -316,5 +316,16 @@ public class PlayerAgent : Agent
         {
             intr.tryInteract();
         }
+
+
+        // Movement reward
+        if (actions.DiscreteActions[0] !=0 || actions.DiscreteActions[1] != 0)
+        {
+            grantReward(1);
+        }
+
+        // Existential penalty
+        grantReward(2);
+
     }
 }

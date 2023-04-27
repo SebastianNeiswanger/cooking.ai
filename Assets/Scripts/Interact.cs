@@ -82,5 +82,9 @@ public class Interact : MonoBehaviour
             burgerDisplay.DisplayBurger(returnedHand);
             controller.moveOn();
         }
+
+        // Reward agent for interractions
+
+
     }
 }

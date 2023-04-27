@@ -238,7 +238,7 @@ public class PlayerAgent : Agent
     public override void OnEpisodeBegin()
     {
         // Center the agent
-        transform.position = new Vector3(2.0f, -0.49f, 2.0f);
+        transform.position = new Vector3(4.75f, -0.49f, 4.75f);
 
         // Set reward group
         rewardGroup = System.Convert.ToInt32(Academy.Instance.EnvironmentParameters.GetWithDefault("lessonNum", defaultRewardGroup));

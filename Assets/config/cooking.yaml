@@ -38,7 +38,7 @@ environment_parameters:
           measure: reward
           behavior: cooking
           signal_smoothing: true
-          min_lesson_length: 5000
+          min_lesson_length: 1000
           threshold: 1.0
         value: 0.0
       - name: CookThatMeat # Put beef in oven
@@ -46,7 +46,7 @@ environment_parameters:
           measure: reward
           behavior: cooking
           signal_smoothing: true
-          min_lesson_length: 1000
+          min_lesson_length: 100
           threshold: 2.0
         value: 1.0
       - name: SlapUrBuns # Grab plate, buns, and cooked burger
@@ -54,7 +54,7 @@ environment_parameters:
           measure: reward
           behavior: cooking
           signal_smoothing: true
-          min_lesson_length: 1000
+          min_lesson_length: 100
           threshold: 1.8
         value: 2.0
       - name: TheFullSpiel # Add all chopped ingredients to burger
@@ -62,7 +62,7 @@ environment_parameters:
           measure: reward
           behavior: cooking
           signal_smoothing: true
-          min_lesson_length: 5000
+          min_lesson_length: 100
           threshold: 1.8
         value: 3.0
       - name: OrderUp # Serve finished burger to customer
@@ -70,7 +70,7 @@ environment_parameters:
           measure: reward
           behavior: cooking
           signal_smoothing: true
-          min_lesson_length: 500
+          min_lesson_length: 100
           threshold: 1.8
         value: 4.0
       - name: PickyEaters # Give customer burger based on order (orders should change here)
@@ -78,7 +78,7 @@ environment_parameters:
           measure: reward
           behavior: cooking
           signal_smoothing: true
-          min_lesson_length: 2000
+          min_lesson_length: 100
           threshold: 1.8
         value: 5.0
       - name: AmericanPortionSize # Customer makes multiple orders

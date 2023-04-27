@@ -46,6 +46,7 @@ public class Interact : MonoBehaviour
         timer = 0f;
         timerOn = false;
         controller.moveOn();
+        burgerDisplay.DisplayBurger(0);
     }
 
     public int getHand()

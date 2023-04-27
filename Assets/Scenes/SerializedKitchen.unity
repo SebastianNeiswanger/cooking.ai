@@ -402,6 +402,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2111776218}
     - target: {fileID: 966501576188224831, guid: 97bda3b18409c09459863d423a49a5de, type: 3}
+      propertyPath: MaxStep
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 966501576188224831, guid: 97bda3b18409c09459863d423a49a5de, type: 3}
       propertyPath: kitchen
       value: 
       objectReference: {fileID: 799454734}
@@ -415,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7749387823538476451, guid: 97bda3b18409c09459863d423a49a5de, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.9965377
+      value: 4.75
       objectReference: {fileID: 0}
     - target: {fileID: 7749387823538476451, guid: 97bda3b18409c09459863d423a49a5de, type: 3}
       propertyPath: m_LocalPosition.y
@@ -423,7 +427,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7749387823538476451, guid: 97bda3b18409c09459863d423a49a5de, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.548293
+      value: 4.75
       objectReference: {fileID: 0}
     - target: {fileID: 7749387823538476451, guid: 97bda3b18409c09459863d423a49a5de, type: 3}
       propertyPath: m_LocalRotation.w

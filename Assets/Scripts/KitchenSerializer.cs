@@ -280,7 +280,6 @@ class SerializedTile
     public SerializedTile(string t, int x, int z, int o, int s, int b)
     {
         type = t;
-        Debug.Log(type.ToString());
         this.x = x;
         this.z = z;
         orientation = o;

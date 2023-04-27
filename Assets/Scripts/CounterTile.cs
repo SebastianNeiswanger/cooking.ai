@@ -27,6 +27,7 @@ public class CounterTile : Tile
         }
 
         kitchen.UpdateTileState(x, z, state);
+        transform.GetChild(1).GetComponent<BurgerDisplay>().DisplayBurger(State);
         return newHand;
     }
     private bool hasUnprepared(int burger)

@@ -265,7 +265,7 @@ public class PlayerAgent : Agent
                 break;
         }
 
-        // TODO: Clear hand
+        intr.resetHand();
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -275,8 +275,8 @@ public class PlayerAgent : Agent
         sensor.AddObservation(transform.localPosition.z);
 
 
-        // TODO: Agent burger (what is he holding)
-        sensor.AddObservation(0);
+        // Agent burger (what is he holding)
+        sensor.AddObservation(intr.getHand());
 
 
         // Tiles and burgers
